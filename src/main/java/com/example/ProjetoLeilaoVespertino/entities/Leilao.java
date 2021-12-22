@@ -19,10 +19,6 @@ public class Leilao {
     @Column(name="ativo", nullable = false)
   //  @Pattern(regexp = "(?i)(true|false)")
     private Boolean ativo;
-    @Column(name ="id_funcionario",nullable = false, length = 10)
-  //  @Pattern(regexp="^[0-9]{1,10}$")
-    private Integer idFuncionario;
-
 
     public Integer getId() {
         return id;
@@ -48,11 +44,4 @@ public class Leilao {
         this.ativo = ativo;
     }
 
-    public Integer getIdFuncionario() {
-        return idFuncionario;
-    }
-
-    public void setIdFuncionario(Integer idFuncionario) {
-        this.idFuncionario = idFuncionario;
-    }
 }
