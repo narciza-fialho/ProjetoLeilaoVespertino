@@ -13,7 +13,6 @@ import java.util.List;
 public class VeterinarioController {
     @Autowired
     private VeterinarioRepository veterinarioRepository;
-    Mensagem msg = new Mensagem();
 
     @GetMapping
     public List<Veterinario> listar(){
@@ -31,7 +30,16 @@ public class VeterinarioController {
     public Mensagem incluir(@RequestBody Veterinario veterinario){
         veterinario.setId(0);
         veterinarioRepository.saveAndFlush(veterinario);
+        Mensagem msg = new Mensagem();
         msg.setMensagem("Incluido com Sucesso.");
+        return msg;
+    }
+
+    @PutMapping
+    public Mensagem alterar(@RequestBody Veterinario veterinario){
+        veterinarioRepository.saveAndFlush(veterinario);
+        Mensagem msg = new Mensagem();
+        msg.setMensagem("Alterado com Sucesso.");
         return msg;
     }
 
@@ -39,6 +47,7 @@ public class VeterinarioController {
     public Mensagem deletar (@RequestBody Veterinario veterinario){
         veterinario.setAtivo(false);
         veterinarioRepository.saveAndFlush(veterinario);
+        Mensagem msg = new Mensagem();
         msg.setMensagem("Deletado com Sucesso.");
         return msg;
     }

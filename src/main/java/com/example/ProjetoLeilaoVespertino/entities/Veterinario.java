@@ -9,17 +9,17 @@ public class Veterinario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="nome", nullable = false, length = 255)
-    @Pattern(regexp = "[A-z\s]{1,255}")
-    private String nome;
     @Column(name="id", nullable = false, unique = true, length = 10)
-    @Pattern(regexp = "[A-z0-9\s]{1,10}")
+    //@Pattern(regexp = "^[0-9]{1,10}")
     private Integer id;
+    @Column(name="nome", nullable = false, length = 255)
+    //@Pattern(regexp = "[A-z\s]{1,255}")
+    private String nome;
     @Column(name="email", nullable = false, unique = true, length = 255)
-    @Pattern(regexp ="[A-z]{1,64}@[A-Za-z0-9]{1,255}.[A-z]{1,3}" )
+    //@Pattern(regexp ="[A-z]{1,64}@[A-Za-z0-9]{1,255}.[A-z]{1,3}" )
     private String email;
     @Column(name="telefone", nullable = false, unique = true, length = 255)
-    @Pattern(regexp = "[0-9]{2}[\\s][0-9]{5}-[0-9]{4}")
+    //@Pattern(regexp = "[0-9]{2}[\\s][0-9]{5}-[0-9]{4}")
     private String telefone;
     @Column(name="ativo")
     private Boolean ativo;
