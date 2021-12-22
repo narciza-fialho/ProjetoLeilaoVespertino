@@ -14,11 +14,6 @@ public class VeterinarioController {
 
     @Autowired
     private VeterinarioRepository veterinarioRepository;
-<<<<<<< HEAD
-
-    Mensagem msg = new Mensagem();
-=======
->>>>>>> a248fe81151dc4c399a4b3ffa68ecbb2c8670a1f
 
     @GetMapping
     public List<Veterinario> listar(){
