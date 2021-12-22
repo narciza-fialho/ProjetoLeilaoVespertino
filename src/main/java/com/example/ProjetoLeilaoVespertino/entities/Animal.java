@@ -13,19 +13,19 @@ public class Animal {
     //@Pattern(regexp="[A-z0-9\s]{1,10}")
     private Integer id;
 
-    @Column(name="nome", nullable = false, length = 255)
+    @Column(name="nome", nullable = false, length = 60)
     //@Pattern(regexp="[A-z\s]{1,255}")
     private String nome;
 
-    @Column(name = "registro", nullable = false, length = 255, unique = true)
+    @Column(name = "registro", nullable = false, length = 50, unique = true)
     //@Pattern(regexp = "[0-9]{1,1000}")
     private String registro;
 
-    @Column(name = "preco", length = 10, nullable = false)
+    @Column(name = "valor", length = 18, nullable = false)
     //@Pattern(regexp = "[1-9]\\d*(\\.\\d+)?")
     private Double preco;
 
-    @Column(name = "raca", nullable = false, length = 255)
+    @Column(name = "raca", nullable = false, length = 50)
     //@Pattern(regexp="[A-z\s]{1,255}")
     private String raca;
 
