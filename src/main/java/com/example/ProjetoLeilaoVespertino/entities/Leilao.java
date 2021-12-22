@@ -16,6 +16,8 @@ public class Leilao {
     @Column(name="data", nullable = false)
   //  @Pattern(regexp="^([1-2]?[0-9]|3[0-1]|0[1-9])/(1?[0-2]|0[1-9])/[0-9]{4}$")
     private String data;
+    @Column(name="nome")
+    private String nome;
     @Column(name="ativo", nullable = false)
   //  @Pattern(regexp = "(?i)(true|false)")
     private Boolean ativo;
@@ -34,6 +36,14 @@ public class Leilao {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Boolean getAtivo() {
