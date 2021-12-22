@@ -39,7 +39,7 @@ public class Animal {
 
     @Column(name = "id_veterinario", length = 10, nullable = false)
     //@Pattern(regexp="[A-z0-9\s]{1,10}"))
-    private Integer idVeterinario
+    private Integer idVeterinario;
 
     public Integer getId() {
         return id;
