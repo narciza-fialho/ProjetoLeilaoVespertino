@@ -4,33 +4,25 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 @Entity
-@Table(name="vendedor")
-public class Vendedor {
+@Table(name="veterinario")
+public class Veterinario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", length = 10, nullable = false)
-    @Pattern(regexp = "^[0-9]{1,10}$")
-    private Integer id;
-    @Column(name="nome", length = 60, nullable = false)
-    @Pattern(regexp = "^[A-Z]{1}[A-Za-z\s]{2,57}$")
+    @Column(name="nome", nullable = false, length = 255)
+    @Pattern(regexp = "[A-z\s]{1,255}")
     private String nome;
-    @Column(name="email", length = 60, nullable = false)
-    @Pattern(regexp = "[A-z0-9]{5,55}$")
+    @Column(name="id", nullable = false, unique = true, length = 10)
+    @Pattern(regexp = "[A-z0-9\s]{1,10}")
+    private Integer id;
+    @Column(name="email", nullable = false, unique = true, length = 255)
+    @Pattern(regexp ="[A-z]{1,64}@[A-Za-z0-9]{1,255}.[A-z]{1,3}" )
     private String email;
-    @Column(name="telefone", length = 11, nullable = false)
-    @Pattern(regexp = "^[0-9]{11}$")
+    @Column(name="telefone", nullable = false, unique = true, length = 255)
+    @Pattern(regexp = "[0-9]{2}[\\s][0-9]{5}-[0-9]{4}")
     private String telefone;
-    @Column(name="ativo", nullable = false)
+    @Column(name="ativo")
     private Boolean ativo;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
@@ -38,6 +30,14 @@ public class Vendedor {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -63,4 +63,6 @@ public class Vendedor {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
+
+
 }
