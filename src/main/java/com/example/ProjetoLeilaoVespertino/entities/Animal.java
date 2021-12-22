@@ -13,25 +13,33 @@ public class Animal {
     //@Pattern(regexp="[A-z0-9\s]{1,10}")
     private Integer id;
 
-    @Column(name="nome", nullable = false, length = 255)
+    @Column(name="nome", nullable = false, length = 60)
     //@Pattern(regexp="[A-z\s]{1,255}")
     private String nome;
 
-    @Column(name = "registro", nullable = false, length = 255, unique = true)
+    @Column(name = "registro", nullable = false, length = 50, unique = true)
     //@Pattern(regexp = "[0-9]{1,1000}")
     private String registro;
 
-    @Column(name = "preco", length = 10, nullable = false)
+    @Column(name = "valor", length = 18, nullable = false)
     //@Pattern(regexp = "[1-9]\\d*(\\.\\d+)?")
     private Double preco;
 
-    @Column(name = "raca", nullable = false, length = 255)
+    @Column(name = "raca", nullable = false, length = 50)
     //@Pattern(regexp="[A-z\s]{1,255}")
     private String raca;
 
     @Column(name = "ativo", nullable = false)
     //@Pattern(regexp = "^true$|^false$")
     private Boolean ativo;
+
+    @Column(name = "id_vendedor", length = 10, nullable = false)
+    //@Pattern(regexp="[A-z0-9\s]{1,10}"))
+    private Integer idVendedor;
+
+    @Column(name = "id_veterinario", length = 10, nullable = false)
+    //@Pattern(regexp="[A-z0-9\s]{1,10}"))
+    private Integer idVeterinario
 
     public Integer getId() {
         return id;
@@ -79,5 +87,21 @@ public class Animal {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Integer getIdVendedor() {
+        return idVendedor;
+    }
+
+    public void setIdVendedor(Integer idVendedor) {
+        this.idVendedor = idVendedor;
+    }
+
+    public Integer getIdVeterinario() {
+        return idVeterinario;
+    }
+
+    public void setIdVeterinario(Integer idVeterinario) {
+        this.idVeterinario = idVeterinario;
     }
 }

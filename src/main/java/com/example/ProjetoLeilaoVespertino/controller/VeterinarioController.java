@@ -14,8 +14,11 @@ public class VeterinarioController {
 
     @Autowired
     private VeterinarioRepository veterinarioRepository;
+<<<<<<< HEAD
 
     Mensagem msg = new Mensagem();
+=======
+>>>>>>> a248fe81151dc4c399a4b3ffa68ecbb2c8670a1f
 
     @GetMapping
     public List<Veterinario> listar(){
@@ -33,7 +36,16 @@ public class VeterinarioController {
     public Mensagem incluir(@RequestBody Veterinario veterinario){
         veterinario.setId(0);
         veterinarioRepository.saveAndFlush(veterinario);
+        Mensagem msg = new Mensagem();
         msg.setMensagem("Incluido com Sucesso.");
+        return msg;
+    }
+
+    @PutMapping
+    public Mensagem alterar(@RequestBody Veterinario veterinario){
+        veterinarioRepository.saveAndFlush(veterinario);
+        Mensagem msg = new Mensagem();
+        msg.setMensagem("Alterado com Sucesso.");
         return msg;
     }
 
@@ -41,6 +53,7 @@ public class VeterinarioController {
     public Mensagem deletar (@RequestBody Veterinario veterinario){
         veterinario.setAtivo(false);
         veterinarioRepository.saveAndFlush(veterinario);
+        Mensagem msg = new Mensagem();
         msg.setMensagem("Deletado com Sucesso.");
         return msg;
     }
