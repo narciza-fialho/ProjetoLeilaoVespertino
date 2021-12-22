@@ -16,7 +16,8 @@ public class Leilao {
     @Column(name="data", nullable = false)
   //  @Pattern(regexp="^([1-2]?[0-9]|3[0-1]|0[1-9])/(1?[0-2]|0[1-9])/[0-9]{4}$")
     private String data;
-    @Column(name="nome")
+    @Column(name="nome", length = 50, nullable = false)
+    // @Pattern(regexp = "^[A-Z]{1}[A-Za-z\s]{2,47}$")
     private String nome;
     @Column(name="ativo", nullable = false)
   //  @Pattern(regexp = "(?i)(true|false)")
