@@ -16,7 +16,7 @@ public class LanceController {
     private LanceRepository lanceRepositoryRepository;
 
     @GetMapping
-    public List<Lance> lista(){
+    public List<Lance> listar(){
         List<Lance> lista = lanceRepositoryRepository.findByAtivo(true);
         return lista;
     }

@@ -11,8 +11,10 @@ import java.util.List;
 @RestController
 @RequestMapping("veterinario")
 public class VeterinarioController {
+
     @Autowired
     private VeterinarioRepository veterinarioRepository;
+
     Mensagem msg = new Mensagem();
 
     @GetMapping

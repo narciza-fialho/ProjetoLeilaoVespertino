@@ -11,8 +11,10 @@ import java.util.List;
 @RestController
 @RequestMapping("animal")
 public class AnimalController {
+
     @Autowired
     private AnimalRepository animalRepository;
+
     @GetMapping
     public List<Animal> listar(){
         List<Animal> lista = animalRepository.findByAtivo(true);
@@ -24,37 +26,34 @@ public class AnimalController {
         return animal;
     }
     @PostMapping
-    public Mensagem incluirAnimal(@RequestBody Animal animal){
+    public Mensagem incluir(@RequestBody Animal animal){
+
         animal.setId(0);
         animalRepository.save(animal);
         animalRepository.flush();
+
         Mensagem msg = new Mensagem();
         msg.setMensagem("ok");
         return msg;
-
-
     }
     @PutMapping
-    public Mensagem alterar (@RequestBody Animal animal){
+    public Mensagem alterar(@RequestBody Animal animal){
         animalRepository.save(animal);
         animalRepository.flush();
         Mensagem msg = new Mensagem();
         msg.setMensagem("ok");
         return msg;
-
     }
     @DeleteMapping
     public Mensagem Deletar(@RequestBody Animal animal){
+
         animal.setAtivo(false);
         animalRepository.save(animal);
         animalRepository.flush();
+
         Mensagem msg = new Mensagem();
         msg.setMensagem("deletado");
         return msg;
-
-
-
-
 
     }
 
