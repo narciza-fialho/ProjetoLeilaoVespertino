@@ -28,17 +28,17 @@ public class VendedorBiz {
     }
 
     public Boolean isValid(){
-        Boolean resultado = nomeNaoPodeSerNulo(this.vendedor);
-        resultado = telefoneNaoPodeExistirNoBanco(this.vendedor) && resultado;
-        resultado = emailNaoPodeSerIgual(this.vendedor) && resultado;
+        Boolean resultado = nomeNaoPodeSerNulo(this.vendedor.getNome());
+        resultado = telefoneNaoPodeExistirNoBanco(this.vendedor.getTelefone()) && resultado;
+        resultado = emailNaoPodeSerIgual(this.vendedor.getEmail()) && resultado;
         return resultado;
     }
 
-    public Boolean nomeNaoPodeSerNulo(Vendedor vendedor){
-        String[] contador = vendedor.getNome().split("");
+    public Boolean nomeNaoPodeSerNulo(String nome){
+        String[] contador = nome.split("");
 
         if (contador.length < 3){
-            erros.add("O nome nao pode ser vazio!");
+            erros.add("O nome nao pode ser menor que 3!");
             return false;
         }
         else{
@@ -46,22 +46,22 @@ public class VendedorBiz {
         }
     }
 
-    public Boolean telefoneNaoPodeExistirNoBanco(Vendedor vendedor){
+    public Boolean telefoneNaoPodeExistirNoBanco(String telefone){
         List<Vendedor> lista = vendedorRepository.findAll();
 
         for(Vendedor s: lista){
-            if(s.getTelefone().equals(vendedor.getTelefone())){
+            if(s.getTelefone().equals(telefone)){
                 erros.add("Telefone nao pode existir");
                 return false;
             }
         }
         return true;
     }
-    public Boolean emailNaoPodeSerIgual(Vendedor vendedor){
+    public Boolean emailNaoPodeSerIgual(String email){
         List<Vendedor> lista = vendedorRepository.findAll();
 
         for(Vendedor s: lista){
-            if(s.getEmail().equals(vendedor.getEmail())){
+            if(s.getEmail().equals(email)){
                 erros.add("Ja existe este email cadastrado");
                 return false;
             }
