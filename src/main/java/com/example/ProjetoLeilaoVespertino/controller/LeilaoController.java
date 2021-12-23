@@ -2,6 +2,7 @@ package com.example.ProjetoLeilaoVespertino.controller;
 
 
 import com.example.ProjetoLeilaoVespertino.Mensagem;
+import com.example.ProjetoLeilaoVespertino.business.LeilaoBiz;
 import com.example.ProjetoLeilaoVespertino.entities.Leilao;
 import com.example.ProjetoLeilaoVespertino.repositories.LeilaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +31,21 @@ public class LeilaoController {
 
     @PostMapping
     public Mensagem incluir(@RequestBody Leilao leilao){
+        LeilaoBiz leilaoBiz = new LeilaoBiz(leilao, leilaoRepository);
+        Mensagem msg = new Mensagem();
 
+        if(leilaoBiz.isValid())
+        {
         leilao.setId(0);
         leilaoRepository.saveAndFlush(leilao);
-        Mensagem msg = new Mensagem();
         msg.setMensagem("Inserido!!");
+        }
+        else
+        {
+            msg.setErro((leilaoBiz.getErros()));
+            msg.setMensagem(("erro"));
+        }
+
         return msg;
     }
     @PutMapping

@@ -3,6 +3,8 @@ package com.example.ProjetoLeilaoVespertino.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -23,6 +25,25 @@ public class Leilao {
     @Column(name="ativo", nullable = false)
   //  @Pattern(regexp = "(?i)(true|false)")
     private Boolean ativo;
+
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private String dateToStr =  dateFormat.format(data);
+
+    public DateFormat getDateFormat() {
+        return dateFormat;
+    }
+
+    public void setDateFormat(DateFormat dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    public String getDateToStr() {
+        return dateToStr;
+    }
+
+    public void setDateToStr(String dateToStr) {
+        this.dateToStr = dateToStr;
+    }
 
     public Integer getId() {
         return id;
