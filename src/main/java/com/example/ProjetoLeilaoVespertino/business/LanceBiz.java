@@ -87,11 +87,9 @@ public class LanceBiz {
             return false;
         }
         if (!leilaoEAtivo(id)){
-            erros.add("O leilao não está na lista");
             return false;
         } else {
             return true;
         }
-
     }
 }
