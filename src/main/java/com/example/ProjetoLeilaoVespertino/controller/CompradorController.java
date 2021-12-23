@@ -2,6 +2,7 @@ package com.example.ProjetoLeilaoVespertino.controller;
 
 
 import com.example.ProjetoLeilaoVespertino.Mensagem;
+import com.example.ProjetoLeilaoVespertino.business.CompradorBiz;
 import com.example.ProjetoLeilaoVespertino.entities.Comprador;
 import com.example.ProjetoLeilaoVespertino.repositories.CompradorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,30 +30,36 @@ public class CompradorController {
     @PostMapping
     public Mensagem incluir(@RequestBody Comprador comprador){
 
-        //CompradorBiz compradorBiz = new CompradorBiz(comprador, compradorRepository);
+        CompradorBiz compradorBiz = new CompradorBiz(comprador, compradorRepository);
         Mensagem msg = new Mensagem();
 
-        //if (funcionarioBiz.isValid()) {
-        comprador.setId(0);
-        compradorRepository.save(comprador);
-        compradorRepository.flush();
-        msg.setMensagem("Incluido com sucesso!");
-       // } else {
-            //msg.setErro( compradorBiz.getErros() );
-            //msg.setMensagem("Erro");
-        //}
+        if (compradorBiz.isValid()) {
+            comprador.setId(0);
+            compradorRepository.save(comprador);
+            compradorRepository.flush();
+            msg.setMensagem("Incluido com sucesso!");
+        } else {
+            msg.setErro( compradorBiz.getErros() );
+            msg.setMensagem("Erro");
+        }
         return msg;
 
     }
     @PutMapping
     public Mensagem alterar (@RequestBody Comprador comprador){
-        compradorRepository.save(comprador);
-        compradorRepository.flush();
+        CompradorBiz compradorBiz = new CompradorBiz(comprador, compradorRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Alterado com sucesso!");
+        if (compradorBiz.isValid()) {
+            compradorRepository.save(comprador);
+            compradorRepository.flush();
+            msg.setMensagem("Alterado com sucesso!");
+        } else {
+            msg.setErro( compradorBiz.getErros() );
+            msg.setMensagem("Erro");
+        }
         return msg;
-
     }
+
     @DeleteMapping
     public Mensagem Deletar(@RequestBody Comprador comprador){
         comprador.setAtivo(false);
