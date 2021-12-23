@@ -10,5 +10,7 @@ import java.util.List;
 @Repository
 public interface VeterinarioRepository extends JpaRepository<Veterinario, Integer> {
     List<Veterinario> findByAtivo(Boolean ativo);
+    List<Veterinario> findByTelefone(String telefone);
+    List<Veterinario> findByEmail(String email);
 }
 

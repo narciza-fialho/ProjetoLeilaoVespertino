@@ -1,6 +1,7 @@
 package com.example.ProjetoLeilaoVespertino.controller;
 
 import com.example.ProjetoLeilaoVespertino.Mensagem;
+import com.example.ProjetoLeilaoVespertino.business.VeterinarioBiz;
 import com.example.ProjetoLeilaoVespertino.entities.Veterinario;
 import com.example.ProjetoLeilaoVespertino.repositories.VeterinarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,18 @@ public class VeterinarioController {
 
     @PostMapping
     public Mensagem incluir(@RequestBody Veterinario veterinario){
-        veterinario.setId(0);
-        veterinarioRepository.saveAndFlush(veterinario);
+
+        VeterinarioBiz veterinarioBiz = new VeterinarioBiz(veterinario, veterinarioRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Incluido com Sucesso.");
+
+        if(veterinarioBiz.isValid()) {
+            veterinario.setId(0);
+            veterinarioRepository.saveAndFlush(veterinario);
+            msg.setMensagem("Incluido com Sucesso.");
+        } else {
+            msg.setErro( veterinarioBiz.getErros() );
+            msg.setMensagem("Erro");
+        }
         return msg;
     }
 
