@@ -18,46 +18,45 @@ public class LeilaoController {
     private LeilaoRepository leilaoRepository;
 
     @GetMapping
-    public List<Leilao> lista(){
+    public List<Leilao> lista() {
         List<Leilao> lista = leilaoRepository.findByAtivo(true);
         return lista;
     }
 
     @GetMapping("/{id}")
-    public Leilao buscar(@PathVariable int id){
+    public Leilao buscar(@PathVariable int id) {
         Leilao leilao = leilaoRepository.findById(id).get();
         return leilao;
     }
 
     @PostMapping
-    public Mensagem incluir(@RequestBody Leilao leilao){
+    public Mensagem incluir(@RequestBody Leilao leilao) {
         LeilaoBiz leilaoBiz = new LeilaoBiz(leilao, leilaoRepository);
         Mensagem msg = new Mensagem();
 
-        if(leilaoBiz.isValid())
-        {
-        leilao.setId(0);
-        leilaoRepository.saveAndFlush(leilao);
-        msg.setMensagem("Inserido!!");
-        }
-        else
-        {
+        if (leilaoBiz.isValid()) {
+            leilao.setId(0);
+            leilaoRepository.saveAndFlush(leilao);
+            msg.setMensagem("Inserido!!");
+        } else {
             msg.setErro((leilaoBiz.getErros()));
             msg.setMensagem(("erro"));
         }
 
         return msg;
     }
+
     @PutMapping
-    public Mensagem alterar (@RequestBody Leilao leilao){
+    public Mensagem alterar(@RequestBody Leilao leilao) {
         leilaoRepository.save(leilao);
         leilaoRepository.flush();
         Mensagem msg = new Mensagem();
         msg.setMensagem("Alterado!!");
         return msg;
     }
+
     @DeleteMapping
-    public Mensagem deletar (@RequestBody Leilao leilao){
+    public Mensagem deletar(@RequestBody Leilao leilao) {
         leilao.setAtivo(false);
         leilaoRepository.save(leilao);
         leilaoRepository.flush();

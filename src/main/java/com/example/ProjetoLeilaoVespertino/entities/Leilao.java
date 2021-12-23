@@ -5,7 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name="leilao")
