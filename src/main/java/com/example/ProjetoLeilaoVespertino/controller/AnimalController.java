@@ -1,8 +1,11 @@
 package com.example.ProjetoLeilaoVespertino.controller;
 
 import com.example.ProjetoLeilaoVespertino.Mensagem;
+import com.example.ProjetoLeilaoVespertino.business.AnimalBiz;
 import com.example.ProjetoLeilaoVespertino.entities.Animal;
 import com.example.ProjetoLeilaoVespertino.repositories.AnimalRepository;
+import com.example.ProjetoLeilaoVespertino.repositories.VendedorRepository;
+import com.example.ProjetoLeilaoVespertino.repositories.VeterinarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +17,10 @@ public class AnimalController {
 
     @Autowired
     private AnimalRepository animalRepository;
+    @Autowired
+    private VeterinarioRepository veterinarioRepository;
+    @Autowired
+    private VendedorRepository vendedorRepository;
 
     @GetMapping
     public List<Animal> listar(){
@@ -27,13 +34,18 @@ public class AnimalController {
     }
     @PostMapping
     public Mensagem incluir(@RequestBody Animal animal){
-
-        animal.setId(0);
-        animalRepository.save(animal);
-        animalRepository.flush();
-
+        AnimalBiz animalBiz = new AnimalBiz(animal, animalRepository, vendedorRepository, veterinarioRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("ok");
+
+        if (animalBiz.isValid()) {
+            animal.setId(0);
+            animalRepository.save(animal);
+            animalRepository.flush();
+            msg.setMensagem("ok");
+        } else {
+            msg.setErro( animalBiz.getErros() );
+            msg.setMensagem("Erro");
+        }
         return msg;
     }
     @PutMapping
