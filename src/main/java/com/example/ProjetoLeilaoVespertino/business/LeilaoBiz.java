@@ -24,7 +24,9 @@ public class LeilaoBiz {
 
     }
     public Boolean isValid(){
-        return true;
+        Boolean resultado = nomeNulo(this.leilao.getNome());
+        resultado = verificadorDeData(this.leilao.getDateToStr()) && resultado;
+        return resultado;
     }
     public Boolean nomeNulo(String nome){
         Boolean resultado = nome == null;
@@ -36,6 +38,7 @@ public class LeilaoBiz {
 
     }
     public Boolean verificadorDeData(String data){
+
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataVerificada = LocalDate.parse(data, dtf);
         LocalDate hoje = LocalDate.now();
