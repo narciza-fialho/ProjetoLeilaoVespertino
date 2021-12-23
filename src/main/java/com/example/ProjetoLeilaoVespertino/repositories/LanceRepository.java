@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface LanceRepository extends JpaRepository<Lance, Integer> {
     List<Lance> findByAtivo(Boolean ativo);
-    List<Leilao> findByIdLeilao(Integer id);
+    List<Lance> findByIdLeilao(Integer id);
 }

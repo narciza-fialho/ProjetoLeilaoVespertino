@@ -2,6 +2,7 @@ package com.example.ProjetoLeilaoVespertino.business;
 
 import com.example.ProjetoLeilaoVespertino.entities.Animal;
 import com.example.ProjetoLeilaoVespertino.entities.Lance;
+import com.example.ProjetoLeilaoVespertino.entities.Leilao;
 import com.example.ProjetoLeilaoVespertino.repositories.AnimalRepository;
 import com.example.ProjetoLeilaoVespertino.repositories.CompradorRepository;
 import com.example.ProjetoLeilaoVespertino.repositories.LanceRepository;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LanceBiz {
-    //O leilão precisa existir para dar o lance
     private Lance lance;
     private LanceRepository lanceRepository;
     private List<String> erros;
@@ -42,6 +42,7 @@ public class LanceBiz {
         resultado = compradorEAtivo(this.lance.getIdComprador()) && resultado;
         resultado = animalEAtivo(this.lance.getIdAnimal()) && resultado;
         resultado = valorMinimo(this.lance.getValor(), this.lance.getIdAnimal()) && resultado;
+        resultado = leilaoExiste(this.lance.getIdLeilao()) && resultado;
         return resultado;
     }
     //Um lance não pode ser dado para um leilão desativado
@@ -78,4 +79,19 @@ public class LanceBiz {
         return resultado;
     }
 
+    //O leilão precisa existir para dar o lance
+    public Boolean leilaoExiste (Integer id) {
+        List<Lance> lista = lanceRepository.findByIdLeilao(id);
+        if(lista.isEmpty()) {
+            erros.add("O leilao não está na lista");
+            return false;
+        }
+        if (!leilaoEAtivo(id)){
+            erros.add("O leilao não está na lista");
+            return false;
+        } else {
+            return true;
+        }
+
+    }
 }
