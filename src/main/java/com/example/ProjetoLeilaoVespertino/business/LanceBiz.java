@@ -78,7 +78,6 @@ public class LanceBiz {
         }
         return resultado;
     }
-
     //O leilão precisa existir para dar o lance
     public Boolean leilaoExiste (Integer id) {
         List<Lance> lista = lanceRepository.findByIdLeilao(id);
@@ -92,6 +91,5 @@ public class LanceBiz {
         } else {
             return true;
         }
-
     }
 }
