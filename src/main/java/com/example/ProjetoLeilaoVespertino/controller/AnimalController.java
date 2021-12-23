@@ -17,10 +17,10 @@ public class AnimalController {
 
     @Autowired
     private AnimalRepository animalRepository;
-  /*  @Autowired
+    @Autowired
     private VeterinarioRepository veterinarioRepository;
     @Autowired
-    private VendedorRepository vendedorRepository; */
+    private VendedorRepository vendedorRepository;
 
     @GetMapping
     public List<Animal> listar(){
@@ -34,7 +34,7 @@ public class AnimalController {
     }
     @PostMapping
     public Mensagem incluir(@RequestBody Animal animal){
-        AnimalBiz animalBiz = new AnimalBiz(animal, animalRepository/* vendedorRepository,veterinarioRepository*/);
+        AnimalBiz animalBiz = new AnimalBiz(animal, animalRepository, vendedorRepository, veterinarioRepository);
         Mensagem msg = new Mensagem();
 
         if (animalBiz.isValid()) {

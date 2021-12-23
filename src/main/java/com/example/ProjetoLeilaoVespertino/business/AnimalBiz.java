@@ -26,11 +26,11 @@ public class AnimalBiz {
         this.erros = erros;
     }
 
-    public AnimalBiz(Animal animal, AnimalRepository ar/*, VendedorRepository vr, VeterinarioRepository veterinarioRepository*/ ){
+    public AnimalBiz(Animal animal, AnimalRepository ar, VendedorRepository vr, VeterinarioRepository veterinarioRepository ){
         this.animal = animal;
         this.animalRepository = ar;
-     //   this.vendedorRepository = vr;
-      //  this.veterinarioRepository = veterinarioRepository;
+        this.vendedorRepository = vr;
+        this.veterinarioRepository = veterinarioRepository;
         this.erros = new ArrayList<>();
     }
 
@@ -40,8 +40,8 @@ public class AnimalBiz {
         resultado = precoValorPositivo(this.animal.getPreco()) && resultado;
         resultado = racaComecaComMaiusculo(this.animal.getRaca()) && resultado;
         resultado = nomeDiferenteDeNulo(this.animal.getNome()) && resultado;
-       // resultado = vendedorAtivo(this.animal.getIdVendedor()) && resultado;
-
+        resultado = verificadorDoVendedor(this.animal.getIdVendedor()) && resultado;
+        resultado = verificadorDoVeterinario(this.animal.getIdVeterinario()) && resultado;
 
         return resultado;
     }
@@ -82,22 +82,47 @@ public class AnimalBiz {
         }
         return resultado;
     }
-  /*  public Boolean vendedorAtivo(Integer id){
-        Boolean vazio = vendedorRepository.findById(id).isEmpty();
-        if (vazio){
-            erros.add("O vendedor nao existe!");
+
+    public Boolean verificadorDoVendedor(Integer id ){
+      List<Animal> lista = animalRepository.findByIdVendedor(id);
+      if(lista.isEmpty()) {
+          erros.add("O vendedor não está na lista");
+          return false;
+      }
+      if (!idVendedorAtivo(id)){
+          erros.add("O vendedor não está ativo");
+          return false;
+      } else {
+          return true;
+      }
+    }
+
+    public Boolean idVendedorAtivo(Integer id){
+        Boolean quartoexiste = vendedorRepository.findById(id).get().getAtivo();
+
+        return quartoexiste;
+    }
+
+    public Boolean verificadorDoVeterinario(Integer id ){
+        List<Animal> lista = animalRepository.findByIdVeterinario(id);
+        if(lista.isEmpty()) {
+            erros.add("O veterinario não está na lista");
+            return false;
+        }
+        if (!idVendedorAtivo(id)){
+            erros.add("O veterinario não está ativo");
             return false;
         } else {
-            Vendedor ativo = vendedorRepository.findById(id).get();
-            ativo = ativo.getAtivo().
-            if(!ativo) {
-                erros.add("Vendedor nao esta ativo");
-                return false;
-            }
-            return  true;
-
-        } */
-
+            return true;
+        }
     }
+
+    public Boolean idVeterinarioAtivo(Integer id){
+        Boolean quartoexiste = veterinarioRepository.findById(id).get().getAtivo();
+
+        return quartoexiste;
+    }
+
+}
 
 
