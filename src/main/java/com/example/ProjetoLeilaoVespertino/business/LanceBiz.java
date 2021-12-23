@@ -2,7 +2,6 @@ package com.example.ProjetoLeilaoVespertino.business;
 
 import com.example.ProjetoLeilaoVespertino.entities.Animal;
 import com.example.ProjetoLeilaoVespertino.entities.Lance;
-import com.example.ProjetoLeilaoVespertino.entities.Leilao;
 import com.example.ProjetoLeilaoVespertino.repositories.AnimalRepository;
 import com.example.ProjetoLeilaoVespertino.repositories.CompradorRepository;
 import com.example.ProjetoLeilaoVespertino.repositories.LanceRepository;
