@@ -12,10 +12,10 @@ public class Comprador {
     //@Pattern(regexp = "^[0-9]{1,10}$")
     private Integer id;
     @Column(name="nome",length = 60, nullable = false, unique = true)
-    //@Pattern(regexp ="^[A-Z]{1}[a-z]{1,59}")
+    //@Pattern(regexp ="^[A-Z]{1}[A-z\s]{1,59}")
     private String nome;
     @Column(name = "email",length = 60,nullable = false,unique = true)
-    //@Pattern(regexp = "[^[a-z0-9_]{1,64}@[a-z.0-9_]{1,255}$]")
+    //@Pattern(regexp = "^[a-z0-9_]{1,64}@[a-z.0-9_]{1,255}$")
     private String email;
     @Column(name="telefone", length = 11, nullable = false,unique = true)
     //@Pattern(regexp = "^[0-9]{11}$")
