@@ -3,6 +3,7 @@ package com.example.ProjetoLeilaoVespertino.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.util.Date;
 
 @Entity
 @Table(name="leilao")
@@ -15,7 +16,7 @@ public class Leilao {
     private Integer id;
     @Column(name="data", nullable = false)
   //  @Pattern(regexp="^([1-2]?[0-9]|3[0-1]|0[1-9])/(1?[0-2]|0[1-9])/[0-9]{4}$")
-    private String data;
+    private Date data;
     @Column(name="nome", length = 50, nullable = false)
     // @Pattern(regexp = "^[A-Z]{1}[A-Za-z\s]{2,47}$")
     private String nome;
@@ -31,11 +32,11 @@ public class Leilao {
         this.id = id;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
