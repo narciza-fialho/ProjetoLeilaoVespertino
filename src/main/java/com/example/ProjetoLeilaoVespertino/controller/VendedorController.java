@@ -1,6 +1,7 @@
 package com.example.ProjetoLeilaoVespertino.controller;
 
 import com.example.ProjetoLeilaoVespertino.Mensagem;
+import com.example.ProjetoLeilaoVespertino.business.VendedorBiz;
 import com.example.ProjetoLeilaoVespertino.entities.Vendedor;
 import com.example.ProjetoLeilaoVespertino.repositories.VendedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +29,38 @@ public class VendedorController {
 
     @PostMapping
     public Mensagem incluir (@RequestBody Vendedor vendedor) {
-        vendedor.setId(0);
-        vendedorRepository.saveAndFlush(vendedor);
+        VendedorBiz vendedorBiz = new VendedorBiz(vendedor, vendedorRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Incluido com sucesso");
+
+        if(vendedorBiz.isValid()){
+            vendedor.setId(0);
+            vendedorRepository.saveAndFlush(vendedor);
+
+            msg.setMensagem("Incluido com sucesso");
+            return msg;
+        }
+        else{
+            msg.setMensagem("Erro");
+            msg.setErro(vendedorBiz.getErros());
+        }
         return msg;
     }
 
     @PutMapping
     public Mensagem alterar (@RequestBody Vendedor vendedor) {
-        vendedorRepository.saveAndFlush(vendedor);
+        VendedorBiz vendedorBiz = new VendedorBiz(vendedor, vendedorRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Alterado com sucesso");
+
+        if(vendedorBiz.isValid()){
+            vendedorRepository.saveAndFlush(vendedor);
+
+            msg.setMensagem("Incluido com sucesso");
+            return msg;
+        }
+        else{
+            msg.setMensagem("Erro");
+            msg.setErro(vendedorBiz.getErros());
+        }
         return msg;
     }
 
