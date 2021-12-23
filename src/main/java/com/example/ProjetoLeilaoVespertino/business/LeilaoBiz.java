@@ -25,7 +25,7 @@ public class LeilaoBiz {
     }
     public Boolean isValid(){
         Boolean resultado = nomeNulo(this.leilao.getNome());
-        resultado = verificadorDeData(this.leilao.getDateToStr()) && resultado;
+
         return resultado;
     }
     public Boolean nomeNulo(String nome){

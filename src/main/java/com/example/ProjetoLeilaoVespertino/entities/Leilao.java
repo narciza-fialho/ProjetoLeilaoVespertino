@@ -26,24 +26,9 @@ public class Leilao {
   //  @Pattern(regexp = "(?i)(true|false)")
     private Boolean ativo;
 
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    private String dateToStr =  dateFormat.format(data);
 
-    public DateFormat getDateFormat() {
-        return dateFormat;
-    }
 
-    public void setDateFormat(DateFormat dateFormat) {
-        this.dateFormat = dateFormat;
-    }
 
-    public String getDateToStr() {
-        return dateToStr;
-    }
-
-    public void setDateToStr(String dateToStr) {
-        this.dateToStr = dateToStr;
-    }
 
     public Integer getId() {
         return id;
