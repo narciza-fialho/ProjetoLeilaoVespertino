@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("veterinario")
+@CrossOrigin
 public class VeterinarioController {
 
     @Autowired
