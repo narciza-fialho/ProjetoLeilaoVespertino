@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("lance")
+@CrossOrigin
 public class LanceController {
     @Autowired
     private LanceRepository lanceRepository;
