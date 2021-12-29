@@ -2,6 +2,7 @@ package com.example.ProjetoLeilaoVespertino.business;
 
 import com.example.ProjetoLeilaoVespertino.entities.Animal;
 import com.example.ProjetoLeilaoVespertino.entities.Lance;
+import com.example.ProjetoLeilaoVespertino.entities.Leilao;
 import com.example.ProjetoLeilaoVespertino.repositories.AnimalRepository;
 import com.example.ProjetoLeilaoVespertino.repositories.CompradorRepository;
 import com.example.ProjetoLeilaoVespertino.repositories.LanceRepository;
@@ -37,8 +38,7 @@ public class LanceBiz {
     }
 
     public Boolean isValid(){
-        Boolean resultado = leilaoEAtivo(this.lance.getIdLeilao());
-        resultado = compradorEAtivo(this.lance.getIdComprador()) && resultado;
+        Boolean resultado = compradorEAtivo(this.lance.getIdComprador());
         resultado = animalEAtivo(this.lance.getIdAnimal()) && resultado;
         resultado = valorMinimo(this.lance.getValor(), this.lance.getIdAnimal()) && resultado;
         resultado = leilaoExiste(this.lance.getIdLeilao()) && resultado;
@@ -54,40 +54,55 @@ public class LanceBiz {
     }
     //Lance não pode ser dado para um comprador desativado
     public Boolean compradorEAtivo(Integer id){
-        Boolean ativo = compradorRepository.findById(id).get().getAtivo();
-        if (!ativo){
-            erros.add("Comprador não é ativo");
+
+        if (compradorRepository.findById(id).isPresent()) {
+            Boolean ativo = compradorRepository.findById(id).get().getAtivo();
+            if (!ativo) {
+                erros.add("Comprador não é ativo");
+            }
+            return ativo;
+        } else {
+            erros.add("Comprador nao existe no sistema");
+            return false;
         }
-        return ativo;
     }
     //Lance não pode ser dado para um animal desativado
-    public Boolean animalEAtivo(Integer id){
-        Boolean ativo = animalRepository.findById(id).get().getAtivo();
-        if (!ativo){
-            erros.add("Animal não é ativo");
+    public Boolean animalEAtivo(Integer id) {
+        if (animalRepository.findById(id).isPresent()) {
+            Boolean ativo = animalRepository.findById(id).get().getAtivo();
+            if (!ativo) {
+                erros.add("Animal não é ativo");
+            }
+            return ativo;
+        } else {
+            erros.add("Animal não existe no sistema");
+            return false;
         }
-        return ativo;
     }
     //Lance precisa ter valor maior ou igual que do animal
     public Boolean valorMinimo (Double preco, Integer id) {
-        Animal animal = animalRepository.findById(id).get();
-        Boolean resultado = preco >= animal.getPreco();
-        if (!resultado) {
-            erros.add("Valor invalido");
+        Boolean lista = animalRepository.findById(id).isPresent();
+        if(!lista) {
+            erros.add("O animal não está na lista");
+            return false;
+        }else {
+            Animal animal = animalRepository.findById(id).get();
+            Boolean resultado = preco >= animal.getPreco();
+            if (!resultado) {
+                erros.add("Valor invalido");
+            }
+            return resultado;
         }
-        return resultado;
+
     }
     //O leilão precisa existir para dar o lance
     public Boolean leilaoExiste (Integer id) {
-        List<Lance> lista = lanceRepository.findByIdLeilao(id);
-        if(lista.isEmpty()) {
+        Boolean lista = leilaoRepository.findById(id).isPresent();
+        if(!lista) {
             erros.add("O leilao não está na lista");
             return false;
         }
-        if (!leilaoEAtivo(id)){
-            return false;
-        } else {
-            return true;
-        }
+        return  true;
+
     }
 }
