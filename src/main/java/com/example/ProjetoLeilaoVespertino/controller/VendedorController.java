@@ -49,20 +49,21 @@ public class VendedorController {
 
     @PutMapping
     public Mensagem alterar (@RequestBody Vendedor vendedor) {
-        VendedorBiz vendedorBiz = new VendedorBiz(vendedor, vendedorRepository);
+       // VendedorBiz vendedorBiz = new VendedorBiz(vendedor, vendedorRepository);
         Mensagem msg = new Mensagem();
 
-        if(vendedorBiz.isValid()){
+        //if(vendedorBiz.isValid()){
             vendedorRepository.saveAndFlush(vendedor);
 
             msg.setMensagem("Incluido com sucesso");
             return msg;
-        }
-        else{
-            msg.setMensagem("Erro");
+        //}
+        //else{
+            /*msg.setMensagem("Erro");
             msg.setErro(vendedorBiz.getErros());
-        }
-        return msg;
+            System.out.println(vendedorBiz.getErros());*/
+        //}
+        //return msg;
     }
 
     @DeleteMapping
