@@ -37,12 +37,11 @@ public class LeilaoBiz {
     }
 
     public Boolean nomeNulo(String nome) {
-        Boolean resultado = nome == null;
-        if (resultado) {
-            erros.add("O nome não pode ser nulo");
+        Boolean resultado = !nome.isEmpty();
+        if(!resultado){
+            erros.add("O nome nao pode estar vazio");
         }
-        return !resultado;
-
+        return resultado;
     }
 
     public Boolean verificadorDeData(Date data) {

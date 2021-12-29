@@ -56,16 +56,16 @@ public class LanceController {
     }
     @PutMapping
     public Mensagem alterar (@RequestBody Lance lance){
-        LanceBiz lanceBiz = new LanceBiz(lance, lanceRepository,leilaoRepository,compradorRepository,animalRepository);
+        //LanceBiz lanceBiz = new LanceBiz(lance, lanceRepository,leilaoRepository,compradorRepository,animalRepository);
         Mensagem msg = new Mensagem();
-        if(lanceBiz.isValid()){
+        //if(lanceBiz.isValid()){
             lanceRepository.saveAndFlush(lance);
             msg.setMensagem("Alterado!!");
-        }
-        else {
+        //}
+        /*else {
             msg.setErro(lanceBiz.getErros());
             msg.setMensagem("Erro");
-        }
+        }*/
         return msg;
     }
     @DeleteMapping
