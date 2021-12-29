@@ -48,16 +48,16 @@ public class CompradorController {
     }
     @PutMapping
     public Mensagem alterar (@RequestBody Comprador comprador){
-        CompradorBiz compradorBiz = new CompradorBiz(comprador, compradorRepository);
+        //CompradorBiz compradorBiz = new CompradorBiz(comprador, compradorRepository);
         Mensagem msg = new Mensagem();
-        if (compradorBiz.isValid()) {
+        //if (compradorBiz.isValid()) {
             compradorRepository.save(comprador);
             compradorRepository.flush();
             msg.setMensagem("Alterado com sucesso!");
-        } else {
+        /*} else {
             msg.setErro( compradorBiz.getErros() );
             msg.setMensagem("Erro");
-        }
+        }*/
         return msg;
     }
 
