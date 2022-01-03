@@ -35,7 +35,7 @@ public class AnimalController {
     }
     @PostMapping
     public Mensagem incluir(@RequestBody Animal animal){
-        AnimalBiz animalBiz = new AnimalBiz(animal, animalRepository, vendedorRepository, veterinarioRepository);
+        AnimalBiz animalBiz = new AnimalBiz(animal.getId(), animal, animalRepository, vendedorRepository, veterinarioRepository);
         Mensagem msg = new Mensagem();
 
         if (animalBiz.isValid()) {

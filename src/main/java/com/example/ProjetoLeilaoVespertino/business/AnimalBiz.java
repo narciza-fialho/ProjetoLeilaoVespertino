@@ -16,6 +16,9 @@ public class AnimalBiz {
     private VeterinarioRepository veterinarioRepository;
     private Vendedor vendedor;
     private AnimalRepository animalRepository;
+    private Boolean incluindo;
+    private Boolean alterando;
+
     private List<String> erros;
 
     public List<String> getErros() {
@@ -26,7 +29,11 @@ public class AnimalBiz {
         this.erros = erros;
     }
 
-    public AnimalBiz(Animal animal, AnimalRepository ar, VendedorRepository vr, VeterinarioRepository veterinarioRepository ){
+    public AnimalBiz(int modo, Animal animal, AnimalRepository ar, VendedorRepository vr, VeterinarioRepository veterinarioRepository ){
+
+        this.incluindo = modo==0;
+        this.alterando = modo!=0;
+
         this.animal = animal;
         this.animalRepository = ar;
         this.vendedorRepository = vr;
@@ -35,7 +42,10 @@ public class AnimalBiz {
     }
 
     public Boolean isValid(){
-        Boolean resultado = registroNaoExiste(this.animal.getRegistro());
+        Boolean resultado = false;
+        if (this.incluindo) {
+            resultado = registroNaoExiste(this.animal.getRegistro());
+        }
         resultado = registroSomenteNumeros(this.animal.getRegistro()) && resultado;
         resultado = precoValorPositivo(this.animal.getPreco()) && resultado;
         resultado = racaComecaComMaiusculo(this.animal.getRaca()) && resultado;
