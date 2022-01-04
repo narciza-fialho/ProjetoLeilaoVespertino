@@ -3,6 +3,7 @@ package com.example.ProjetoLeilaoVespertino.controller;
 
 import com.example.ProjetoLeilaoVespertino.Mensagem;
 import com.example.ProjetoLeilaoVespertino.business.LanceBiz;
+import com.example.ProjetoLeilaoVespertino.entities.Animal;
 import com.example.ProjetoLeilaoVespertino.entities.Lance;
 import com.example.ProjetoLeilaoVespertino.repositories.AnimalRepository;
 import com.example.ProjetoLeilaoVespertino.repositories.CompradorRepository;
@@ -45,11 +46,12 @@ public class LanceController {
         if(lanceBiz.isValid()){
             lance.setId(0);
             lanceRepository.saveAndFlush(lance);
-            msg.setMensagem("Inserido!!");
+            msg.setMensagem("Tudo certo, lance cadastrado!");
         }
         else {
             msg.setErro(lanceBiz.getErros());
             msg.setMensagem("Erro");
+            System.out.println(msg.getErro());
         }
         return msg;
 
@@ -60,7 +62,7 @@ public class LanceController {
         Mensagem msg = new Mensagem();
         //if(lanceBiz.isValid()){
             lanceRepository.saveAndFlush(lance);
-            msg.setMensagem("Alterado!!");
+        msg.setMensagem("Tudo certo, cadastro do lance alterado!");
         //}
         /*else {
             msg.setErro(lanceBiz.getErros());
@@ -68,14 +70,17 @@ public class LanceController {
         }*/
         return msg;
     }
-    @DeleteMapping
-    public Mensagem deletar (@RequestBody Lance lance){
+    @DeleteMapping("/{id}")
+    public Mensagem Deletar(@PathVariable int id){
+
+        Lance lance = lanceRepository.findById(id).get();
+
         lance.setAtivo(false);
         lanceRepository.save(lance);
         lanceRepository.flush();
 
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Deletado");
+        msg.setMensagem("Lance deletado com sucesso");
         return msg;
     }
 }

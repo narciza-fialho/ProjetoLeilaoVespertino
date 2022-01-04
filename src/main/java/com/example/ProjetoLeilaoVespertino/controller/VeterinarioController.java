@@ -2,6 +2,7 @@ package com.example.ProjetoLeilaoVespertino.controller;
 
 import com.example.ProjetoLeilaoVespertino.Mensagem;
 import com.example.ProjetoLeilaoVespertino.business.VeterinarioBiz;
+import com.example.ProjetoLeilaoVespertino.entities.Vendedor;
 import com.example.ProjetoLeilaoVespertino.entities.Veterinario;
 import com.example.ProjetoLeilaoVespertino.repositories.VeterinarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,14 +49,24 @@ public class VeterinarioController {
 
     @PutMapping
     public Mensagem alterar(@RequestBody Veterinario veterinario){
-        veterinarioRepository.saveAndFlush(veterinario);
+        VeterinarioBiz veterinarioBiz = new VeterinarioBiz(veterinario, veterinarioRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Alterado com Sucesso.");
+
+        if(veterinarioBiz.isValid()) {
+            veterinarioRepository.saveAndFlush(veterinario);
+            msg.setMensagem("Tudo certo, cadastro do veterinario alterado!.");
+        }
+        else {
+            msg.setErro( veterinarioBiz.getErros() );
+            msg.setMensagem("Erro");
+        }
         return msg;
     }
 
-    @DeleteMapping
-    public Mensagem deletar (@RequestBody Veterinario veterinario){
+    @DeleteMapping("/{id}")
+    public Mensagem Deletar(@PathVariable int id){
+
+        Veterinario veterinario = veterinarioRepository.findById(id).get();
         veterinario.setAtivo(false);
         veterinarioRepository.saveAndFlush(veterinario);
         Mensagem msg = new Mensagem();

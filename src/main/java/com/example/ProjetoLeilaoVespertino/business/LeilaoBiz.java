@@ -49,7 +49,7 @@ public class LeilaoBiz {
         Date hoje = Date.valueOf(LocalDate.now());
 
         if ( data.before(hoje)) {
-            erros.add("Esse dia ja é passado");
+            erros.add("Escolha outra data, atual ou posterior!");
             return false;
         } else {
             return true;

@@ -42,7 +42,7 @@ public class AnimalController {
             animal.setId(0);
             animalRepository.save(animal);
             animalRepository.flush();
-            msg.setMensagem("ok");
+            msg.setMensagem("Tudo certo, animal cadastrado!");
         } else {
             msg.setErro( animalBiz.getErros() );
             msg.setMensagem("Erro");
@@ -56,7 +56,7 @@ public class AnimalController {
         if (animalBiz.isValid()) {
             animalRepository.save(animal);
             animalRepository.flush();
-            msg.setMensagem("ok");
+            msg.setMensagem("Tudo certo, cadastro do animal alterado!");
         } else {
             msg.setMensagem("Erro");
             msg.setErro(animalBiz.getErros());
@@ -73,7 +73,7 @@ public class AnimalController {
         animalRepository.flush();
 
         Mensagem msg = new Mensagem();
-        msg.setMensagem("deletado");
+        msg.setMensagem("Animal deletado com sucesso!");
         return msg;
 
     }

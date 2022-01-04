@@ -3,6 +3,7 @@ package com.example.ProjetoLeilaoVespertino.controller;
 
 import com.example.ProjetoLeilaoVespertino.Mensagem;
 import com.example.ProjetoLeilaoVespertino.business.CompradorBiz;
+import com.example.ProjetoLeilaoVespertino.entities.Animal;
 import com.example.ProjetoLeilaoVespertino.entities.Comprador;
 import com.example.ProjetoLeilaoVespertino.repositories.CompradorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class CompradorController {
             comprador.setId(0);
             compradorRepository.save(comprador);
             compradorRepository.flush();
-            msg.setMensagem("Incluido com sucesso!");
+            msg.setMensagem("Tudo certo, comprador cadastrado!");
         } else {
             msg.setErro( compradorBiz.getErros() );
             msg.setMensagem("Erro");
@@ -53,7 +54,7 @@ public class CompradorController {
         //if (compradorBiz.isValid()) {
             compradorRepository.save(comprador);
             compradorRepository.flush();
-            msg.setMensagem("Alterado com sucesso!");
+        msg.setMensagem("Tudo certo, cadastro do comprador alterado!");
         /*} else {
             msg.setErro( compradorBiz.getErros() );
             msg.setMensagem("Erro");
@@ -61,13 +62,16 @@ public class CompradorController {
         return msg;
     }
 
-    @DeleteMapping
-    public Mensagem Deletar(@RequestBody Comprador comprador){
+    @DeleteMapping("/{id}")
+    public Mensagem Deletar(@PathVariable int id){
+
+        Comprador comprador = compradorRepository.findById(id).get();
+
         comprador.setAtivo(false);
         compradorRepository.save(comprador);
         compradorRepository.flush();
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Deleta com sucesso!");
+        msg.setMensagem("Cadastro deletado com sucesso!");
         return msg;
 
     }

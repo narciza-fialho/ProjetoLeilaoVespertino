@@ -83,13 +83,13 @@ public class LanceBiz {
     public Boolean valorMinimo (Double preco, Integer id) {
         Boolean lista = animalRepository.findById(id).isPresent();
         if(!lista) {
-            erros.add("O animal não está na lista");
+            erros.add("O animal não existe!");
             return false;
         }else {
             Animal animal = animalRepository.findById(id).get();
             Boolean resultado = preco >= animal.getPreco();
             if (!resultado) {
-                erros.add("Valor invalido");
+                erros.add("O lance nao ser menor que o valor do animal!");
             }
             return resultado;
         }
@@ -99,7 +99,7 @@ public class LanceBiz {
     public Boolean leilaoExiste (Integer id) {
         Boolean lista = leilaoRepository.findById(id).isPresent();
         if(!lista) {
-            erros.add("O leilao não está na lista");
+            erros.add("O leilao não existe!");
             return false;
         }
         return  true;

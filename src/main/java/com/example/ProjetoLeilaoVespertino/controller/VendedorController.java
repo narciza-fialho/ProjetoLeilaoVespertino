@@ -2,6 +2,7 @@ package com.example.ProjetoLeilaoVespertino.controller;
 
 import com.example.ProjetoLeilaoVespertino.Mensagem;
 import com.example.ProjetoLeilaoVespertino.business.VendedorBiz;
+import com.example.ProjetoLeilaoVespertino.entities.Animal;
 import com.example.ProjetoLeilaoVespertino.entities.Vendedor;
 import com.example.ProjetoLeilaoVespertino.repositories.VendedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,7 @@ public class VendedorController {
         if(vendedorBiz.isValid()){
             vendedor.setId(0);
             vendedorRepository.saveAndFlush(vendedor);
-
-            msg.setMensagem("Incluido com sucesso");
+            msg.setMensagem("Tudo certo, vendedor cadastrado!");
             return msg;
         }
         else{
@@ -49,29 +49,29 @@ public class VendedorController {
 
     @PutMapping
     public Mensagem alterar (@RequestBody Vendedor vendedor) {
-       // VendedorBiz vendedorBiz = new VendedorBiz(vendedor, vendedorRepository);
+        VendedorBiz vendedorBiz = new VendedorBiz(vendedor, vendedorRepository);
         Mensagem msg = new Mensagem();
 
-        //if(vendedorBiz.isValid()){
+        if(vendedorBiz.isValid()){
             vendedorRepository.saveAndFlush(vendedor);
-
-            msg.setMensagem("Incluido com sucesso");
+            msg.setMensagem("Tudo certo, cadastro do vendedor alterado!");
             return msg;
-        //}
-        //else{
-            /*msg.setMensagem("Erro");
+        }
+        else{
+            msg.setMensagem("Erro");
             msg.setErro(vendedorBiz.getErros());
-            System.out.println(vendedorBiz.getErros());*/
-        //}
-        //return msg;
+            System.out.println(vendedorBiz.getErros());
+        }
+        return msg;
     }
 
-    @DeleteMapping
-    public Mensagem deletar (@RequestBody Vendedor vendedor) {
+    @DeleteMapping("/{id}")
+    public Mensagem Deletar(@PathVariable int id){
+        Vendedor vendedor = vendedorRepository.findById(id).get();
         vendedor.setAtivo(false);
         vendedorRepository.saveAndFlush(vendedor);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Deletado com sucesso");
+        msg.setMensagem("Vendedor deletado com sucesso!");
         return msg;
     }
 }

@@ -38,7 +38,7 @@ public class VendedorBiz {
         String[] contador = nome.split("");
 
         if (contador.length < 3){
-            erros.add("O nome nao pode ser menor que 3!");
+            erros.add("O nome nao pode ser menor que 3 letras!");
             return false;
         }
         else{
@@ -51,7 +51,7 @@ public class VendedorBiz {
 
         for(Vendedor s: lista){
             if(s.getTelefone().equals(telefone)){
-                erros.add("Telefone nao pode existir");
+                erros.add("Telefone ja esta cadastrado!");
                 return false;
             }
         }

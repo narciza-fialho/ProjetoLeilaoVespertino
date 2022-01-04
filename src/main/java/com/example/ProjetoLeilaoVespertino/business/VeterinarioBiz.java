@@ -45,7 +45,7 @@ public class VeterinarioBiz {
         List<Veterinario> lista = veterinarioRepository.findByTelefone(telefone);
         Boolean resultado = lista.isEmpty();
         if (!resultado) {
-            erros.add("Este telefone ja existe!");
+            erros.add("Este telefone ja esta cadastrado!");
         }
         return resultado;
     }
@@ -54,7 +54,7 @@ public class VeterinarioBiz {
         List<Veterinario> lista = veterinarioRepository.findByEmail(email);
         Boolean resultado = lista.isEmpty();
         if (!resultado) {
-            erros.add("Este email ja existe!");
+            erros.add("Este email ja existe, no sistema!");
         }
         return resultado;
     }

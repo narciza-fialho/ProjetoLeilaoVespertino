@@ -3,6 +3,7 @@ package com.example.ProjetoLeilaoVespertino.controller;
 
 import com.example.ProjetoLeilaoVespertino.Mensagem;
 import com.example.ProjetoLeilaoVespertino.business.LeilaoBiz;
+import com.example.ProjetoLeilaoVespertino.entities.Animal;
 import com.example.ProjetoLeilaoVespertino.entities.Leilao;
 import com.example.ProjetoLeilaoVespertino.repositories.LeilaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,21 +50,31 @@ public class LeilaoController {
 
     @PutMapping
     public Mensagem alterar(@RequestBody Leilao leilao) {
-        leilaoRepository.save(leilao);
-        leilaoRepository.flush();
+        LeilaoBiz leilaoBiz = new LeilaoBiz(leilao, leilaoRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Alterado!!");
-        return msg;
+        if (leilaoBiz.isValid()) {
+            leilaoRepository.save(leilao);
+            leilaoRepository.flush();
+            msg.setMensagem("Tudo certo, cadastro do animal alterado!");
+        }
+        else {
+            msg.setErro((leilaoBiz.getErros()));
+            msg.setMensagem(("erro"));
+        }
+            return msg;
     }
 
-    @DeleteMapping
-    public Mensagem deletar(@RequestBody Leilao leilao) {
+    @DeleteMapping("/{id}")
+    public Mensagem Deletar(@PathVariable int id){
+
+        Leilao leilao = leilaoRepository.findById(id).get();
+
         leilao.setAtivo(false);
         leilaoRepository.save(leilao);
         leilaoRepository.flush();
 
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Deletado");
+        msg.setMensagem("Leilao deletado com sucesso!");
         return msg;
     }
 }
