@@ -18,6 +18,8 @@ public class LanceBiz {
     private LeilaoRepository leilaoRepository;
     private CompradorRepository compradorRepository;
     private AnimalRepository animalRepository;
+    private Boolean incluindo;
+    private Boolean alterando;
 
     public List<String> getErros() {
         return erros;
@@ -27,8 +29,12 @@ public class LanceBiz {
         this.erros = erros;
     }
 
-    public LanceBiz(Lance lance, LanceRepository lanceRepository, LeilaoRepository leilaoRepository,
+    public LanceBiz(int modo, Lance lance, LanceRepository lanceRepository, LeilaoRepository leilaoRepository,
                     CompradorRepository compradorRepository, AnimalRepository animalRepository ){
+
+        this.incluindo = modo==0;
+        this.alterando = modo!=0;
+
         this.lance = lance;
         this.lanceRepository = lanceRepository;
         this.erros = new ArrayList<>();
@@ -38,10 +44,13 @@ public class LanceBiz {
     }
 
     public Boolean isValid(){
-        Boolean resultado = compradorEAtivo(this.lance.getIdComprador());
+        Boolean resultado = true;
+        if (this.incluindo) {
+            resultado = leilaoExiste(this.lance.getIdLeilao()) && resultado;
+        }
+        resultado = compradorEAtivo(this.lance.getIdComprador());
         resultado = animalEAtivo(this.lance.getIdAnimal()) && resultado;
         resultado = valorMinimo(this.lance.getValor(), this.lance.getIdAnimal()) && resultado;
-        resultado = leilaoExiste(this.lance.getIdLeilao()) && resultado;
         return resultado;
     }
     //Um lance não pode ser dado para um leilão desativado

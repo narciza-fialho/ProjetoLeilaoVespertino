@@ -31,7 +31,7 @@ public class VendedorController {
 
     @PostMapping
     public Mensagem incluir (@RequestBody Vendedor vendedor) {
-        VendedorBiz vendedorBiz = new VendedorBiz(vendedor, vendedorRepository);
+        VendedorBiz vendedorBiz = new VendedorBiz(vendedor.getId(), vendedor, vendedorRepository);
         Mensagem msg = new Mensagem();
 
         if(vendedorBiz.isValid()){
@@ -49,7 +49,7 @@ public class VendedorController {
 
     @PutMapping
     public Mensagem alterar (@RequestBody Vendedor vendedor) {
-        VendedorBiz vendedorBiz = new VendedorBiz(vendedor, vendedorRepository);
+        VendedorBiz vendedorBiz = new VendedorBiz(vendedor.getId(), vendedor, vendedorRepository);
         Mensagem msg = new Mensagem();
 
         if(vendedorBiz.isValid()){

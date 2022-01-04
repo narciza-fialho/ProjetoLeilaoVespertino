@@ -32,7 +32,7 @@ public class CompradorController {
     @PostMapping
     public Mensagem incluir(@RequestBody Comprador comprador){
 
-        CompradorBiz compradorBiz = new CompradorBiz(comprador, compradorRepository);
+        CompradorBiz compradorBiz = new CompradorBiz(comprador.getId(), comprador, compradorRepository);
         Mensagem msg = new Mensagem();
 
         if (compradorBiz.isValid()) {
@@ -49,7 +49,7 @@ public class CompradorController {
     }
     @PutMapping
     public Mensagem alterar (@RequestBody Comprador comprador){
-        CompradorBiz compradorBiz = new CompradorBiz(comprador, compradorRepository);
+        CompradorBiz compradorBiz = new CompradorBiz(comprador.getId(), comprador, compradorRepository );
         Mensagem msg = new Mensagem();
         if (compradorBiz.isValid()) {
             compradorRepository.save(comprador);

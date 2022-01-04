@@ -10,6 +10,8 @@ public class VendedorBiz {
 
     private Vendedor vendedor;
     private VendedorRepository vendedorRepository;
+    private Boolean incluindo;
+    private Boolean alterando;
 
     private List<String> erros;
 
@@ -21,16 +23,21 @@ public class VendedorBiz {
         this.erros = erros;
     }
 
-    public VendedorBiz(Vendedor vendedor, VendedorRepository vendedorRepository) {
+    public VendedorBiz(int modo, Vendedor vendedor, VendedorRepository vendedorRepository) {
+        this.incluindo = modo==0;
+        this.alterando = modo!=0;
         this.vendedor = vendedor;
         this.vendedorRepository = vendedorRepository;
         this.erros = new ArrayList<>();
     }
 
     public Boolean isValid(){
-        Boolean resultado = nomeNaoPodeSerNulo(this.vendedor.getNome());
-        resultado = telefoneNaoPodeExistirNoBanco(this.vendedor.getTelefone()) && resultado;
-        resultado = emailNaoPodeSerIgual(this.vendedor.getEmail()) && resultado;
+        Boolean resultado = true;
+        if (this.incluindo) {
+            resultado = telefoneNaoPodeExistirNoBanco(this.vendedor.getTelefone()) && resultado;
+            resultado = emailNaoPodeSerIgual(this.vendedor.getEmail()) && resultado;
+        }
+        resultado = nomeNaoPodeSerNulo(this.vendedor.getNome());
         return resultado;
     }
 

@@ -33,7 +33,7 @@ public class VeterinarioController {
     @PostMapping
     public Mensagem incluir(@RequestBody Veterinario veterinario){
 
-        VeterinarioBiz veterinarioBiz = new VeterinarioBiz(veterinario, veterinarioRepository);
+        VeterinarioBiz veterinarioBiz = new VeterinarioBiz(veterinario.getId(), veterinario, veterinarioRepository);
         Mensagem msg = new Mensagem();
 
         if(veterinarioBiz.isValid()) {
@@ -49,7 +49,7 @@ public class VeterinarioController {
 
     @PutMapping
     public Mensagem alterar(@RequestBody Veterinario veterinario){
-        VeterinarioBiz veterinarioBiz = new VeterinarioBiz(veterinario, veterinarioRepository);
+        VeterinarioBiz veterinarioBiz = new VeterinarioBiz(veterinario.getId(), veterinario, veterinarioRepository);
         Mensagem msg = new Mensagem();
 
         if(veterinarioBiz.isValid()) {

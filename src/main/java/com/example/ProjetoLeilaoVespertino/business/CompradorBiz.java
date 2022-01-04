@@ -11,6 +11,9 @@ public class CompradorBiz {
     private Comprador comprador;
     private CompradorRepository compradorRepository;
     private List<String> erros;
+    private Boolean incluindo;
+    private Boolean alterando;
+
 
     public List<String> getErros() {
         return erros;
@@ -20,16 +23,23 @@ public class CompradorBiz {
         this.erros = erros;
     }
 
-    public CompradorBiz (Comprador comprador, CompradorRepository compradorRepository) {
+    public CompradorBiz (int modo, Comprador comprador, CompradorRepository compradorRepository) {
+
+        this.incluindo = modo==0;
+        this.alterando = modo!=0;
         this.comprador = comprador;
         this.compradorRepository = compradorRepository;
         this.erros = new ArrayList<>();
     }
 
     public Boolean isValid() {
-        Boolean resultado = nomePeloMenos2Letras(this.comprador.getNome());
-        resultado = telefoneNaoExiste(this.comprador.getTelefone()) && resultado;
-        resultado = emailNaoExiste(this.comprador.getEmail()) && resultado;
+        Boolean resultado = true;
+        if (this.incluindo) {
+            resultado = telefoneNaoExiste(this.comprador.getTelefone()) && resultado;
+            resultado = emailNaoExiste(this.comprador.getEmail()) && resultado;
+        }
+        resultado = nomePeloMenos2Letras(this.comprador.getNome());
+
         return resultado;
     }
 

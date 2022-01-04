@@ -41,7 +41,7 @@ public class LanceController {
 
     @PostMapping
     public Mensagem incluir(@RequestBody Lance lance){
-        LanceBiz lanceBiz = new LanceBiz(lance, lanceRepository,leilaoRepository,compradorRepository,animalRepository);
+        LanceBiz lanceBiz = new LanceBiz(lance.getId(), lance, lanceRepository,leilaoRepository,compradorRepository,animalRepository);
         Mensagem msg = new Mensagem();
         if(lanceBiz.isValid()){
             lance.setId(0);
@@ -58,7 +58,7 @@ public class LanceController {
     }
     @PutMapping
     public Mensagem alterar (@RequestBody Lance lance){
-        LanceBiz lanceBiz = new LanceBiz(lance, lanceRepository,leilaoRepository,compradorRepository,animalRepository);
+        LanceBiz lanceBiz = new LanceBiz(lance.getId(), lance, lanceRepository,leilaoRepository,compradorRepository,animalRepository);
         Mensagem msg = new Mensagem();
         if(lanceBiz.isValid()){
             lanceRepository.saveAndFlush(lance);

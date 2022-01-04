@@ -11,6 +11,8 @@ public class VeterinarioBiz {
     private Veterinario veterinario;
     private VeterinarioRepository veterinarioRepository;
     private List<String> erros;
+    private Boolean incluindo;
+    private Boolean alterando;
 
     public List<String> getErros() {
         return erros;
@@ -20,16 +22,22 @@ public class VeterinarioBiz {
         this.erros = erros;
     }
 
-    public VeterinarioBiz (Veterinario veterinario, VeterinarioRepository veterinarioRepository){
+    public VeterinarioBiz (int modo, Veterinario veterinario, VeterinarioRepository veterinarioRepository){
+        this.incluindo = modo==0;
+        this.alterando = modo!=0;
         this.veterinario = veterinario;
         this.veterinarioRepository = veterinarioRepository;
         this.erros = new ArrayList<>();
     }
 
     public Boolean isValid(){
-        Boolean resultado = nomeMin2Letra(this.veterinario.getNome());
-        resultado = telefoneExiste(this.veterinario.getTelefone()) && resultado;
-        resultado = emailExiste(this.veterinario.getEmail()) && resultado;
+        Boolean resultado = true;
+        if (this.incluindo) {
+            resultado = telefoneExiste(this.veterinario.getTelefone()) && resultado;
+            resultado = emailExiste(this.veterinario.getEmail()) && resultado;
+        }
+        resultado = nomeMin2Letra(this.veterinario.getNome());
+
         return resultado;
     }
 
