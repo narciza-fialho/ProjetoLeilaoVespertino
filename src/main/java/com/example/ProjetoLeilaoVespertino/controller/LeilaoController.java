@@ -65,7 +65,7 @@ public class LeilaoController {
     }
 
     @DeleteMapping("/{id}")
-    public Mensagem Deletar(@PathVariable int id){
+    public Mensagem deletar(@PathVariable int id){
 
         Leilao leilao = leilaoRepository.findById(id).get();
 

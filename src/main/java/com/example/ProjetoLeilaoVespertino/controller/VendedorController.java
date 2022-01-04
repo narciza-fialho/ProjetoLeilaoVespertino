@@ -66,7 +66,7 @@ public class VendedorController {
     }
 
     @DeleteMapping("/{id}")
-    public Mensagem Deletar(@PathVariable int id){
+    public Mensagem deletar(@PathVariable int id){
         Vendedor vendedor = vendedorRepository.findById(id).get();
         vendedor.setAtivo(false);
         vendedorRepository.saveAndFlush(vendedor);

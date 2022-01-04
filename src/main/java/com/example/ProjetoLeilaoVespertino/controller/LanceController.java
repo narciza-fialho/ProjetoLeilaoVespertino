@@ -58,20 +58,20 @@ public class LanceController {
     }
     @PutMapping
     public Mensagem alterar (@RequestBody Lance lance){
-        //LanceBiz lanceBiz = new LanceBiz(lance, lanceRepository,leilaoRepository,compradorRepository,animalRepository);
+        LanceBiz lanceBiz = new LanceBiz(lance, lanceRepository,leilaoRepository,compradorRepository,animalRepository);
         Mensagem msg = new Mensagem();
-        //if(lanceBiz.isValid()){
+        if(lanceBiz.isValid()){
             lanceRepository.saveAndFlush(lance);
         msg.setMensagem("Tudo certo, cadastro do lance alterado!");
-        //}
-        /*else {
+        }
+        else {
             msg.setErro(lanceBiz.getErros());
             msg.setMensagem("Erro");
-        }*/
+        }
         return msg;
     }
     @DeleteMapping("/{id}")
-    public Mensagem Deletar(@PathVariable int id){
+    public Mensagem deletar(@PathVariable int id){
 
         Lance lance = lanceRepository.findById(id).get();
 

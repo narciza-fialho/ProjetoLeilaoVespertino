@@ -64,7 +64,7 @@ public class VeterinarioController {
     }
 
     @DeleteMapping("/{id}")
-    public Mensagem Deletar(@PathVariable int id){
+    public Mensagem deletar(@PathVariable int id){
 
         Veterinario veterinario = veterinarioRepository.findById(id).get();
         veterinario.setAtivo(false);
