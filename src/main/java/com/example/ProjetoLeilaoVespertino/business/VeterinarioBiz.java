@@ -44,7 +44,7 @@ public class VeterinarioBiz {
     public Boolean nomeMin2Letra (String nome){
         Boolean resultado  = nome.matches("^[A-z]{3}[A-z\s]{0,58}$");
         if (!resultado){
-            erros.add("O Nome deve pelo menos possuir 3 letras!");
+            erros.add("O Nome deve possuir pelo menos 3 caracteres e ser composto apenas por letras");
         }
         return resultado;
     }
