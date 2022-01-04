@@ -55,7 +55,7 @@ public class LeilaoController {
         if (leilaoBiz.isValid()) {
             leilaoRepository.save(leilao);
             leilaoRepository.flush();
-            msg.setMensagem("Tudo certo, cadastro do animal alterado!");
+            msg.setMensagem("Tudo certo, cadastro do leilão alterado!");
         }
         else {
             msg.setErro((leilaoBiz.getErros()));
