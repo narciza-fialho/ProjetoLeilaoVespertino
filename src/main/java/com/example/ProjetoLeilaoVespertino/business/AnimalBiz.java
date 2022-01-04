@@ -42,7 +42,7 @@ public class AnimalBiz {
     }
 
     public Boolean isValid(){
-        Boolean resultado = false;
+        Boolean resultado = true;
         if (this.incluindo) {
             resultado = registroNaoExiste(this.animal.getRegistro());
         }
@@ -79,7 +79,7 @@ public class AnimalBiz {
 
     }
     public Boolean racaComecaComMaiusculo(String raca){
-        Boolean resultado = raca.matches("^[A-Z\s]{1}[A-z]{1,40}");
+        Boolean resultado = raca.matches("^[A-Z\s]{1}[A-zç]{1,40}");
         if(!resultado){
             erros.add("A primeira letra da raca deve ser maiuscula");
         }

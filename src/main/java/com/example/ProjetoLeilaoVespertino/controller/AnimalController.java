@@ -51,14 +51,22 @@ public class AnimalController {
     }
     @PutMapping
     public Mensagem alterar(@RequestBody Animal animal){
-        animalRepository.save(animal);
-        animalRepository.flush();
+        AnimalBiz animalBiz = new AnimalBiz(animal.getId(), animal, animalRepository, vendedorRepository, veterinarioRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("ok");
+        if (animalBiz.isValid()) {
+            animalRepository.save(animal);
+            animalRepository.flush();
+            msg.setMensagem("ok");
+        } else {
+            msg.setMensagem("Erro");
+            msg.setErro(animalBiz.getErros());
+        }
         return msg;
     }
-    @DeleteMapping
-    public Mensagem Deletar(@RequestBody Animal animal){
+    @DeleteMapping("/{id}")
+    public Mensagem Deletar(@PathVariable int id){
+
+        Animal animal = animalRepository.findById(id).get();
 
         animal.setAtivo(false);
         animalRepository.save(animal);
