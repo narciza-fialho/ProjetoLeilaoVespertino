@@ -81,7 +81,7 @@ public class AnimalBiz {
     public Boolean racaComecaComMaiusculo(String raca){
         Boolean resultado = raca.matches("^[A-Z\s]{1}[A-zç]{1,40}");
         if(!resultado){
-            erros.add("A primeira letra da raca deve ser maiuscula");
+            erros.add("A primeira letra da raca deve ser maiuscula e não pode conter números");
         }
         return resultado;
     }
@@ -92,47 +92,30 @@ public class AnimalBiz {
         }
         return resultado;
     }
-
     public Boolean verificadorDoVendedor(Integer id ){
-      List<Animal> lista = animalRepository.findByIdVendedor(id);
-      if(lista.isEmpty()) {
-          erros.add("O vendedor não está na lista");
-          return false;
-      }
-      if (!idVendedorAtivo(id)){
-          erros.add("O vendedor não está ativo");
-          return false;
-      } else {
-          return true;
-      }
-    }
-
-    public Boolean idVendedorAtivo(Integer id){
-        Boolean quartoexiste = vendedorRepository.findById(id).get().getAtivo();
-
-        return quartoexiste;
-    }
-
-    public Boolean verificadorDoVeterinario(Integer id ){
-        List<Animal> lista = animalRepository.findByIdVeterinario(id);
-        if(lista.isEmpty()) {
-            erros.add("O veterinario não está na lista");
-            return false;
-        }
-        if (!idVendedorAtivo(id)){
-            erros.add("O veterinario não está ativo");
-            return false;
+        if (vendedorRepository.findById(id).isPresent()) {
+            Boolean ativo = vendedorRepository.findById(id).get().getAtivo();
+            if (!ativo) {
+                erros.add("Vendedor não é ativo");
+            }
+            return ativo;
         } else {
-            return true;
+            erros.add("Vendedor não existe no sistema");
+            return false;
         }
     }
-
-    public Boolean idVeterinarioAtivo(Integer id){
-        Boolean quartoexiste = veterinarioRepository.findById(id).get().getAtivo();
-
-        return quartoexiste;
+    public Boolean verificadorDoVeterinario(Integer id ){
+        if (veterinarioRepository.findById(id).isPresent()) {
+            Boolean ativo = veterinarioRepository.findById(id).get().getAtivo();
+            if (!ativo) {
+                erros.add("Veterinário não esta ativo");
+            }
+            return ativo;
+        } else {
+            erros.add("Veterinário não existe no sistema");
+            return false;
+        }
     }
-
 }
 
 
