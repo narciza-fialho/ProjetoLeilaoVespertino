@@ -30,8 +30,11 @@ public class AnimalController {
     }
     @GetMapping("/{id}")
     public Animal buscar(@PathVariable int id){
-        Animal animal = animalRepository.findById(id).get();
-        return animal;
+
+
+            Animal animal = animalRepository.findById(id).get();
+            return animal;
+
     }
     @PostMapping
     public Mensagem incluir(@RequestBody Animal animal){
