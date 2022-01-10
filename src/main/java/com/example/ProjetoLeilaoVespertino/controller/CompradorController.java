@@ -31,12 +31,11 @@ public class CompradorController {
     }
     @PostMapping
     public Mensagem incluir(@RequestBody Comprador comprador){
-
+        comprador.setId(0);
         CompradorBiz compradorBiz = new CompradorBiz(comprador.getId(), comprador, compradorRepository);
         Mensagem msg = new Mensagem();
 
         if (compradorBiz.isValid()) {
-            comprador.setId(0);
             compradorRepository.save(comprador);
             compradorRepository.flush();
             msg.setMensagem("Tudo certo, comprador cadastrado!");

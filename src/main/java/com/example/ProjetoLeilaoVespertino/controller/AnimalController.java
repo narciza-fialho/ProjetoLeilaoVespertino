@@ -40,9 +40,10 @@ public class AnimalController {
     public Mensagem incluir(@RequestBody Animal animal){
         AnimalBiz animalBiz = new AnimalBiz(animal.getId(), animal, animalRepository, vendedorRepository, veterinarioRepository);
         Mensagem msg = new Mensagem();
+        animal.setId(0);
 
         if (animalBiz.isValid()) {
-            animal.setId(0);
+
             animalRepository.save(animal);
             animalRepository.flush();
             msg.setMensagem("Tudo certo, animal cadastrado!");

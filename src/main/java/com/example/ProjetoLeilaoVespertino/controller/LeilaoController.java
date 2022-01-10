@@ -35,9 +35,9 @@ public class LeilaoController {
     public Mensagem incluir(@RequestBody Leilao leilao) {
         LeilaoBiz leilaoBiz = new LeilaoBiz(leilao, leilaoRepository);
         Mensagem msg = new Mensagem();
-
+        leilao.setId(0);
         if (leilaoBiz.isValid()) {
-            leilao.setId(0);
+
             leilaoRepository.saveAndFlush(leilao);
             msg.setMensagem("Inserido!!");
         } else {
