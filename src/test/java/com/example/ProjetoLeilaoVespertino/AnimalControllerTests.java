@@ -94,10 +94,9 @@ public class AnimalControllerTests {
         Boolean expected = true;
         Boolean result = false;
 
-        Animal animalnovo = new Animal();
-        Animal animalantigo = animalController.buscar(4);
         try {
-            animalnovo.setId(4);
+            Animal animalnovo = animalController.buscar(4);
+            Animal animalantigo = animalController.buscar(4);
             animalnovo.setNome("Animal Novinho");
             animalnovo.setRegistro("122221");
             animalnovo.setPreco(1200.0);
@@ -106,6 +105,7 @@ public class AnimalControllerTests {
             animalnovo.setIdVendedor(11);
             animalnovo.setIdVeterinario(5);
             animalController.alterar(animalnovo);
+            animalnovo = animalController.buscar(4);
 
             if (animalnovo == animalantigo) {
                 result = false;
