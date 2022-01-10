@@ -82,10 +82,10 @@ public class VendedorControllerTests {
         Boolean expected = true;
         Boolean result = false;
         Vendedor vendedorNovo = new Vendedor();
-        Vendedor vendedorAnterior= vendedorController.buscar(10);
+        Vendedor vendedorAnterior= vendedorController.buscar(9);
         try{
             vendedorNovo.setAtivo(true);
-            vendedorNovo.setId(10);
+            vendedorNovo.setId(9);
             vendedorNovo.setEmail("abc1234@gmail.com");
             vendedorNovo.setNome("Junior Neto");
             vendedorNovo.setTelefone("98989898989");
@@ -108,7 +108,7 @@ public class VendedorControllerTests {
         Boolean expected = true;
         Boolean result = false;
 
-        Vendedor vendedordelet = vendedorController.buscar(10);
+        Vendedor vendedordelet = vendedorController.buscar(9);
 
         try {
             vendedordelet.setAtivo(false);
