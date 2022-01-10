@@ -76,7 +76,7 @@ public class AnimalControllerTests {
             animalController.incluir(animal);
 
             registros_depois = animalController.listar().stream().count();
-            if (registros_depois > registros_antes){
+            if (registros_depois == registros_antes + 1){
                 result = true;
             } else {
                 result = false;
