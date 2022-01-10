@@ -2,9 +2,12 @@ package com.example.ProjetoLeilaoVespertino;
 
 import com.example.ProjetoLeilaoVespertino.controller.AnimalController;
 import com.example.ProjetoLeilaoVespertino.entities.Animal;
+import com.example.ProjetoLeilaoVespertino.repositories.AnimalRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,6 +17,8 @@ public class AnimalControllerTests {
 
     @Autowired
     private AnimalController animalController;
+    @Autowired
+    private AnimalRepository animalRepository;
 
     private int idAnimalTeste;
 
@@ -82,5 +87,56 @@ public class AnimalControllerTests {
         }
         assertThat(result).isEqualTo(expected);
 
+    }
+
+    @Test
+    public void AlterarTest() {
+        Boolean expected = true;
+        Boolean result = false;
+
+        Animal animalnovo = new Animal();
+        Animal animalantigo = animalController.buscar(4);
+        try {
+            animalnovo.setId(4);
+            animalnovo.setNome("Animal Novinho");
+            animalnovo.setRegistro("122221");
+            animalnovo.setPreco(1200.0);
+            animalnovo.setRaca("Raca nova");
+            animalnovo.setAtivo(true);
+            animalnovo.setIdVendedor(11);
+            animalnovo.setIdVeterinario(5);
+            animalController.alterar(animalnovo);
+
+            if (animalnovo == animalantigo) {
+                result = false;
+            } else {
+                result = true;
+            }
+        } catch (Exception ex){
+            result = false;
+        }
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void DeletarTest() {
+        Boolean expected = true;
+        Boolean result = false;
+
+        Animal animaldelet = animalController.buscar(4);
+
+        try {
+            animaldelet.setAtivo(false);
+            animalController.Deletar(animaldelet.getId());
+            List<Animal> lista = animalRepository.findByAtivo(true);
+            if (lista.contains(animaldelet)) {
+                result = false;
+            } else {
+                result = true;
+            }
+        } catch (Exception ex) {
+            result = false;
+        }
+        assertThat(result).isEqualTo(expected);
     }
 }
