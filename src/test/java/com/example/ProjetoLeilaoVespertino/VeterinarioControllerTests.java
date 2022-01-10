@@ -1,7 +1,6 @@
 package com.example.ProjetoLeilaoVespertino;
 
 import com.example.ProjetoLeilaoVespertino.controller.VeterinarioController;
-import com.example.ProjetoLeilaoVespertino.entities.Animal;
 import com.example.ProjetoLeilaoVespertino.entities.Veterinario;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class VeterinarioControllerTests {
     private int idVeterinario;
 
     public VeterinarioControllerTests(){
-        idVeterinario = 999999;
+        idVeterinario = 19;
     }
 
     @Test
@@ -80,30 +79,29 @@ public class VeterinarioControllerTests {
         }
         assertThat(result).isEqualTo(expected);
     }
-/*
+
     @Test
-    public void ExcluirTest(){
+    public void AlterarTest(){
         Boolean expected = true;
         Boolean result = false;
-        long registros_antes;
-        long registros_depois;
 
         try {
+            Veterinario vetAtual = veterinarioController.buscar(this.idVeterinario);
+            Veterinario vetDepois = veterinarioController.buscar(this.idVeterinario);
+
+            vetAtual.setNome("xxzzzzxxxxxxx");
+            vetAtual.setEmail("lilxzzxxxzheuhex@hotmail.com");
+            vetAtual.setTelefone("4523451445");
+            vetAtual.setAtivo(true);
+
+            veterinarioController.alterar(vetAtual);
 
 
-            Veterinario veterinario = new Veterinario();
 
-            veterinario.setId(0);
-            veterinario.setNome("Haniel");
-            veterinario.setEmail("dala@hotmail.com");
-            veterinario.setTelefone("4521451452");
-            veterinario.setAtivo(true);
-
-            registros_antes = veterinarioController.deletar(1);
-
-            registros_depois = veterinarioController.listar().stream().count();
-
-            if (registros_depois > registros_antes){
+            if (vetAtual.getNome() != vetDepois.getNome()
+                    || vetAtual.getEmail() != vetDepois.getEmail()
+                    || vetAtual.getTelefone() != vetDepois.getTelefone()
+                    || vetAtual.getAtivo() != vetDepois.getAtivo()) {
                 result = true;
             }
 
@@ -111,6 +109,27 @@ public class VeterinarioControllerTests {
             result = false;
         }
         assertThat(result).isEqualTo(expected);
-    }*/
+    }
+
+    @Test
+    public void ExcluirTest(){
+        Boolean expected = true;
+        Boolean result = false;
+
+        try {
+
+            veterinarioController.deletar(this.idVeterinario);
+
+            Veterinario vetTest = veterinarioController.buscar(this.idVeterinario);
+
+            if (!vetTest.getAtivo()){
+                result = true;
+            }
+
+        } catch (Exception ex){
+            result = false;
+        }
+        assertThat(result).isEqualTo(expected);
+    }
 
 }
