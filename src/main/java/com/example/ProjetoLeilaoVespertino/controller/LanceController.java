@@ -35,8 +35,10 @@ public class LanceController {
 
     @GetMapping("/{id}")
     public Lance buscar(@PathVariable int id){
+
         Lance lance = lanceRepository.findById(id).get();
         return lance;
+
     }
 
     @PostMapping
