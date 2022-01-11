@@ -52,6 +52,151 @@ public class AnimalBizTest {
         Boolean expected = true;
         Boolean result = false;
         try {
+            Animal animal = new Animal();
+            animal.setId(0);
+            animal.setAtivo(true);
+            animal.setRegistro("12233");
+            animal.setPreco(1200.0);
+            animal.setRaca("Nelore");
+            animal.setIdVendedor(42);
+            animal.setIdVeterinario(10);
+            animalBiz = new AnimalBiz(animal.getId(), animal, animalRepository, vendedorRepository, veterinarioRepository);
+            if(animalBiz.registroSomenteNumeros(animal.getRegistro())){
+                result=true;
+            }else{
+                result=false;
+            }
+
+
+        } catch (Exception ex) {
+            result = false;
+        }
+        assertThat(result).isEqualTo(expected);
+    }
+    @Test
+    public void precoValorPositivoTest() {
+        Boolean expected = true;
+        Boolean result = false;
+        try {
+            Animal animal = new Animal();
+            animal.setId(0);
+            animal.setAtivo(true);
+            animal.setRegistro("12233");
+            animal.setPreco(1200.0);
+            animal.setRaca("Nelore");
+            animal.setIdVendedor(42);
+            animal.setIdVeterinario(10);
+            animalBiz = new AnimalBiz(animal.getId(), animal, animalRepository, vendedorRepository, veterinarioRepository);
+            if(animalBiz.precoValorPositivo(animal.getPreco())){
+                result=true;
+            }else{
+                result=false;
+            }
+
+
+        } catch (Exception ex) {
+            result = false;
+        }
+        assertThat(result).isEqualTo(expected);
+    }
+    @Test
+    public void racaComecaComMaiusculaTest() {
+        Boolean expected = true;
+        Boolean result = false;
+        try {
+            Animal animal = new Animal();
+            animal.setId(0);
+            animal.setAtivo(true);
+            animal.setRegistro("12233");
+            animal.setPreco(1200.0);
+            animal.setRaca("Nelore");
+            animal.setIdVendedor(42);
+            animal.setIdVeterinario(10);
+            animalBiz = new AnimalBiz(animal.getId(), animal, animalRepository, vendedorRepository, veterinarioRepository);
+            if(animalBiz.racaComecaComMaiusculo(animal.getRaca())){
+                result=true;
+            }else{
+                result=false;
+            }
+
+
+        } catch (Exception ex) {
+            result = false;
+        }
+        assertThat(result).isEqualTo(expected);
+    }
+    @Test
+    public void nomeDiferenteDeNuloTest() {
+        Boolean expected = true;
+        Boolean result = false;
+        try {
+            Animal animal = new Animal();
+            animal.setId(0);
+            animal.setAtivo(true);
+            animal.setRegistro("12233");
+            animal.setPreco(1200.0);
+            animal.setRaca("Nelore");
+            animal.setIdVendedor(42);
+            animal.setIdVeterinario(10);
+            animalBiz = new AnimalBiz(animal.getId(), animal, animalRepository, vendedorRepository, veterinarioRepository);
+            if(animalBiz.nomeDiferenteDeNulo(animal.getNome())){
+                result=true;
+            }else{
+                result=false;
+            }
+
+
+        } catch (Exception ex) {
+            result = false;
+        }
+        assertThat(result).isEqualTo(expected);
+    }
+    @Test
+    public void verificadorDoVendedorTest() {
+        Boolean expected = true;
+        Boolean result = false;
+        try {
+            Animal animal = new Animal();
+            animal.setId(0);
+            animal.setAtivo(true);
+            animal.setRegistro("12233");
+            animal.setPreco(1200.0);
+            animal.setRaca("Nelore");
+            animal.setIdVendedor(42);
+            animal.setIdVeterinario(10);
+            animalBiz = new AnimalBiz(animal.getId(), animal, animalRepository, vendedorRepository, veterinarioRepository);
+            if(animalBiz.verificadorDoVendedor(animal.getIdVendedor())){
+                result=true;
+            }else{
+                result=false;
+            }
+
+
+        } catch (Exception ex) {
+            result = false;
+        }
+        assertThat(result).isEqualTo(expected);
+    }
+    @Test
+    public void verificadorDoVeterinarioTest() {
+        Boolean expected = true;
+        Boolean result = false;
+        try {
+            Animal animal = new Animal();
+            animal.setId(0);
+            animal.setAtivo(true);
+            animal.setRegistro("12233");
+            animal.setPreco(1200.0);
+            animal.setRaca("Nelore");
+            animal.setIdVendedor(42);
+            animal.setIdVeterinario(10);
+            animalBiz = new AnimalBiz(animal.getId(), animal, animalRepository, vendedorRepository, veterinarioRepository);
+            if(animalBiz.verificadorDoVeterinario(animal.getIdVeterinario())){
+                result=true;
+            }else{
+                result=false;
+            }
+
 
         } catch (Exception ex) {
             result = false;
