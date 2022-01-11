@@ -38,7 +38,7 @@ public class CompradorBiz {
             resultado = telefoneNaoExiste(this.comprador.getTelefone()) && resultado;
             resultado = emailNaoExiste(this.comprador.getEmail()) && resultado;
         }
-        resultado = nomePeloMenos2Letras(this.comprador.getNome());
+        resultado = nomePeloMenos2Letras(this.comprador.getNome()) && resultado;
 
         return resultado;
     }

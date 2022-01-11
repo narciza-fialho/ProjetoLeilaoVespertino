@@ -37,7 +37,7 @@ public class VendedorBiz {
             resultado = telefoneNaoPodeExistirNoBanco(this.vendedor.getTelefone()) && resultado;
             resultado = emailNaoPodeSerIgual(this.vendedor.getEmail()) && resultado;
         }
-        resultado = nomeNaoPodeSerNulo(this.vendedor.getNome());
+        resultado = nomeNaoPodeSerNulo(this.vendedor.getNome()) && resultado;
         return resultado;
     }
 

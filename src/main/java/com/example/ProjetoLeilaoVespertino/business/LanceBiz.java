@@ -48,7 +48,7 @@ public class LanceBiz {
         if (this.incluindo) {
             resultado = leilaoExiste(this.lance.getIdLeilao()) && resultado;
         }
-        resultado = compradorEAtivo(this.lance.getIdComprador());
+        resultado = compradorEAtivo(this.lance.getIdComprador()) && resultado;
         resultado = animalEAtivo(this.lance.getIdAnimal()) && resultado;
         resultado = valorMinimo(this.lance.getValor(), this.lance.getIdAnimal()) && resultado;
         return resultado;
