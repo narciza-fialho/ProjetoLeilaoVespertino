@@ -36,7 +36,7 @@ public class VeterinarioBiz {
             resultado = telefoneExiste(this.veterinario.getTelefone()) && resultado;
             resultado = emailExiste(this.veterinario.getEmail()) && resultado;
         }
-        resultado = nomeMin2Letra(this.veterinario.getNome());
+        resultado = nomeMin2Letra(this.veterinario.getNome()) && resultado;
 
         return resultado;
     }

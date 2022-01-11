@@ -25,8 +25,23 @@ public class VeterinarioBizTests {
     }
 
     @Test
-    public void nomeMin2LetraTest(){
+    public void isValidTest(){
+        veterinario = new Veterinario();
 
+        veterinario.setId(0);
+        veterinario.setNome("Maria");
+        veterinario.setTelefone("00000000000");
+        veterinario.setEmail("emailveterinario333333@gmail.com");
+
+        veterinarioBiz = new VeterinarioBiz(0, veterinario, veterinarioRepository);
+
+        Boolean result = veterinarioBiz.isValid();
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void nomeMin2LetraTest(){
 
         veterinario = new Veterinario();
 
