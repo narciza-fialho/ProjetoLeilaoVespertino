@@ -3,7 +3,6 @@ package com.example.ProjetoLeilaoVespertino.controller;
 
 import com.example.ProjetoLeilaoVespertino.Mensagem;
 import com.example.ProjetoLeilaoVespertino.business.CompradorBiz;
-import com.example.ProjetoLeilaoVespertino.entities.Animal;
 import com.example.ProjetoLeilaoVespertino.entities.Comprador;
 import com.example.ProjetoLeilaoVespertino.repositories.CompradorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
