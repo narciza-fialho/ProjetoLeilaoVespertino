@@ -61,17 +61,20 @@ public class LanceControllerTests {
 
         try {
             registros_antes = lanceController.listar().stream().count();
+
             Lance lance = new Lance();
-            lance.setData(Date.valueOf("2021-01-10"));
-            lance.setValor(2500.6);
+            lance.setId(0);
+            lance.setData(Date.valueOf("2021-01-12"));
+            lance.setValor(2510.6);
             lance.setAtivo(true);
-            lance.setIdComprador(8);
-            lance.setIdLeilao(6);
-            lance.setIdAnimal(6);
+            lance.setIdComprador(4);
+            lance.setIdLeilao(10);
+            lance.setIdAnimal(5);
 
             lanceController.incluir(lance);
 
             registros_depois = lanceController.listar().stream().count();
+
             if (registros_depois > registros_antes){
                 result = true;
             } else {
