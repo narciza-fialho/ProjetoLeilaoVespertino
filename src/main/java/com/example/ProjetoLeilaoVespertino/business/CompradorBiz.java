@@ -45,9 +45,9 @@ public class CompradorBiz {
 
     //Um nome não pode ter menos que 2 letras
     public Boolean nomePeloMenos2Letras (String nome) {
-        Boolean resultado = nome.matches("^[A-z]{3}[A-z\s]{0,58}$");
+        Boolean resultado = nome.matches("^[A-z]{2}[A-z\s]{0,58}$");
         if (!resultado) {
-            erros.add("Nome deve ter pelo menos 3 letras");
+            erros.add("Nome deve ter pelo menos 2 letras");
         }
         return resultado;
     }
