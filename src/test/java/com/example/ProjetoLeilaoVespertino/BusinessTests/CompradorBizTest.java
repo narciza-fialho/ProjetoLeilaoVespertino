@@ -92,7 +92,7 @@ public class CompradorBizTest {
     }
 
     @Test
-    public void IsValidTest() {
+    public void IsValidIncluindoTest() {
         Boolean expected = true;
         Boolean result = false;
 
@@ -104,8 +104,7 @@ public class CompradorBizTest {
             compradorNovo.setNome("Nu");
             compradorNovo.setId(0);
             CompradorBiz compradorBiz = new CompradorBiz(compradorNovo.getId(), compradorNovo, compradorRepository);
-            Boolean retorno = compradorBiz.isValid();
-            if (retorno) {
+            if (compradorBiz.isValid()) {
                 result = true;
             } else {
                 result = false;
@@ -113,5 +112,29 @@ public class CompradorBizTest {
         } catch (Exception ex) {
             result = false;
         }
+        assertThat(result).isEqualTo(expected);
+    }
+    @Test
+    public void IsValidAlterandoTest() {
+        Boolean expected = true;
+        Boolean result = false;
+
+        try {
+            Comprador compradorNovo = new Comprador();
+            compradorNovo.setEmail("carmeqq@gmail.com");
+            compradorNovo.setTelefone("9433867512");
+            compradorNovo.setAtivo(true);
+            compradorNovo.setNome("Nu");
+            compradorNovo.setId(0);
+            CompradorBiz compradorBiz = new CompradorBiz(compradorNovo.getId(), compradorNovo, compradorRepository);
+            if (compradorBiz.isValid()) {
+                result = false;
+            } else {
+                result = true;
+            }
+        } catch (Exception ex) {
+            result = false;
+        }
+        assertThat(result).isEqualTo(expected);
     }
 }
