@@ -80,7 +80,6 @@ public class LanceControllerTests {
             } else {
                 result = false;
             }
-
         } catch (Exception ex){
             result = false;
         }
