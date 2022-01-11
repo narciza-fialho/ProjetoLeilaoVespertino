@@ -1,4 +1,4 @@
-package com.example.ProjetoLeilaoVespertino;
+package com.example.ProjetoLeilaoVespertino.ControllerTests;
 
 import com.example.ProjetoLeilaoVespertino.controller.LeilaoController;
 import com.example.ProjetoLeilaoVespertino.entities.Animal;

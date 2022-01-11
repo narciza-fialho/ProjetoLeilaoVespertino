@@ -1,4 +1,4 @@
-package com.example.ProjetoLeilaoVespertino;
+package com.example.ProjetoLeilaoVespertino.ControllerTests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
