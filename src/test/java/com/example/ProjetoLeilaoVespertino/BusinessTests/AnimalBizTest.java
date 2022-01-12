@@ -132,6 +132,7 @@ public class AnimalBizTest {
         try {
             Animal animal = new Animal();
             animal.setId(0);
+            animal.setNome("Aauuuuuu");
             animal.setAtivo(true);
             animal.setRegistro("12233");
             animal.setPreco(1200.0);
