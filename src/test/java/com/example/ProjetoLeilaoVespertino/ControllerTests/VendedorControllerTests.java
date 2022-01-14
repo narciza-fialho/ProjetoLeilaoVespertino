@@ -1,5 +1,6 @@
 package com.example.ProjetoLeilaoVespertino.ControllerTests;
 
+import com.example.ProjetoLeilaoVespertino.Mensagem;
 import com.example.ProjetoLeilaoVespertino.controller.VendedorController;
 
 import com.example.ProjetoLeilaoVespertino.entities.Vendedor;
@@ -81,27 +82,23 @@ public class VendedorControllerTests {
     {
         Boolean expected = true;
         Boolean result = false;
-        Vendedor vendedorNovo = new Vendedor();
-        Vendedor vendedorAnterior= vendedorController.buscar(9);
+        Vendedor vendedorNovo = vendedorController.buscar(9);
         try{
             vendedorNovo.setAtivo(true);
-            vendedorNovo.setId(9);
             vendedorNovo.setEmail("abc1234@gmail.com");
             vendedorNovo.setNome("");
             vendedorNovo.setTelefone("98989898989");
-            vendedorController.alterar(vendedorNovo);
-            if(vendedorNovo==vendedorAnterior){
+            Mensagem msg = vendedorController.alterar(vendedorNovo);
+            if(!msg.getErro().isEmpty()){
                 result=false;
             } else{
                 result=true;
             }
-            }
+        }
         catch (Exception ex){
             result=false;
         }
         assertThat(result).isEqualTo(expected);
-
-
     }
     @Test
     public void DeletarTest() {

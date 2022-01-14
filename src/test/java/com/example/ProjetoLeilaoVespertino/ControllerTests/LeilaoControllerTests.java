@@ -1,5 +1,6 @@
 package com.example.ProjetoLeilaoVespertino.ControllerTests;
 
+import com.example.ProjetoLeilaoVespertino.Mensagem;
 import com.example.ProjetoLeilaoVespertino.controller.LeilaoController;
 import com.example.ProjetoLeilaoVespertino.entities.Animal;
 import com.example.ProjetoLeilaoVespertino.entities.Leilao;
@@ -90,15 +91,14 @@ public class LeilaoControllerTests {
         Boolean expected = true;
         Boolean result = false;
 
-        Leilao leilaoNovo = new Leilao();
-        Leilao leilaoAntigo = leilaoController.buscar(7);
+        Leilao leilaoNovo = leilaoController.buscar(7);
         try {
             leilaoNovo.setId(7);
             leilaoNovo.setData(Date.valueOf("2022-01-11"));
             leilaoNovo.setNome("Clube do boi teste");
             leilaoNovo.setAtivo(true);
-            leilaoController.alterar(leilaoNovo);
-            if (leilaoNovo == leilaoAntigo){
+            Mensagem msg = leilaoController.alterar(leilaoNovo);
+            if (!msg.getErro().isEmpty()){
                 result = false;
             }else {
                 result = true;
