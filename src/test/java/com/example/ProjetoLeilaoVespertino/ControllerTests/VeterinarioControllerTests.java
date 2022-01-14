@@ -1,5 +1,6 @@
 package com.example.ProjetoLeilaoVespertino.ControllerTests;
 
+import com.example.ProjetoLeilaoVespertino.Mensagem;
 import com.example.ProjetoLeilaoVespertino.controller.VeterinarioController;
 import com.example.ProjetoLeilaoVespertino.entities.Veterinario;
 import org.junit.jupiter.api.Test;
@@ -87,24 +88,17 @@ public class VeterinarioControllerTests {
 
         try {
             Veterinario vetAtual = veterinarioController.buscar(this.idVeterinario);
-            Veterinario vetDepois = veterinarioController.buscar(this.idVeterinario);
 
             vetAtual.setNome("xxzzzzxxxxxxx");
             vetAtual.setEmail("lilxzzxxxzheuhex@hotmail.com");
             vetAtual.setTelefone("4523451445");
             vetAtual.setAtivo(true);
-
-            veterinarioController.alterar(vetAtual);
-
-
-
-            if (vetAtual.getNome() != vetDepois.getNome()
-                    || vetAtual.getEmail() != vetDepois.getEmail()
-                    || vetAtual.getTelefone() != vetDepois.getTelefone()
-                    || vetAtual.getAtivo() != vetDepois.getAtivo()) {
+            Mensagem msg = veterinarioController.alterar(vetAtual);
+            if (!msg.getErro().isEmpty()) {
+                result = false;
+            } else {
                 result = true;
             }
-
         } catch (Exception ex){
             result = false;
         }
