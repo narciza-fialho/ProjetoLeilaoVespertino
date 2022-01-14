@@ -1,5 +1,6 @@
 package com.example.ProjetoLeilaoVespertino.ControllerTests;
 
+import com.example.ProjetoLeilaoVespertino.Mensagem;
 import com.example.ProjetoLeilaoVespertino.controller.LanceController;
 import com.example.ProjetoLeilaoVespertino.entities.Animal;
 import com.example.ProjetoLeilaoVespertino.entities.Lance;
@@ -91,23 +92,26 @@ public class LanceControllerTests {
 
         Boolean expected = true;
         Boolean result = true;
+        try {
+            Lance lance = lanceController.buscar(this.idLanceTeste);
 
-        Lance lance = lanceController.buscar(this.idLanceTeste);
-        Lance lanceSemAlteraçao = lanceController.buscar(this.idLanceTeste);
+            lance.setData(Date.valueOf("2021-01-10"));
+            lance.setValor(3109.1);
+            lance.setAtivo(true);
+            lance.setIdComprador(8);
+            lance.setIdLeilao(6);
+            lance.setIdAnimal(6);
 
-        lance.setData(Date.valueOf("2021-01-10"));
-        lance.setValor(3109.1);
-        lance.setAtivo(true);
-        lance.setIdComprador(8);
-        lance.setIdLeilao(6);
-        lance.setIdAnimal(6);
+            Mensagem msg = lanceController.alterar(lance);
 
-        lanceController.alterar(lance);
-
-        if(!lance.equals(lanceSemAlteraçao)){
-            result= true;
+            if(!msg.getErro().isEmpty()){
+                result= false;
+            }else {
+                result = true;
+            }
+        }catch (Exception ex) {
+            result = false;
         }
-
         assertThat(result).isEqualTo(expected);
 
     }

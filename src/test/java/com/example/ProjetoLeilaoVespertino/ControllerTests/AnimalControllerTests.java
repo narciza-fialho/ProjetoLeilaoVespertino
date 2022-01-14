@@ -101,26 +101,25 @@ public class AnimalControllerTests {
         Boolean result = false;
 
         try {
-            Animal animalnovo = animalController.buscar(4);
-            Animal animalantigo = animalController.buscar(4);
-            animalnovo.setNome("Animal Novinho");
-            animalnovo.setRegistro("122221");
-            animalnovo.setPreco(1200.0);
-            animalnovo.setRaca("Raca nova");
-            animalnovo.setAtivo(true);
-            animalnovo.setIdVendedor(11);
-            animalnovo.setIdVeterinario(5);
-            animalController.alterar(animalnovo);
-            animalnovo = animalController.buscar(4);
+            Animal animalTeste = new Animal();
+            animalTeste = animalController.buscar(44);
 
-            if (animalnovo == animalantigo) {
+            animalTeste.setNome("Boi teste alterar");
+            animalTeste.setPreco(1500.00);
+            animalTeste.setRaca("Nelore");
+            animalTeste.setRegistro("8510");
+            animalTeste.setIdVendedor(5);
+            animalTeste.setIdVendedor(39);
+            animalTeste.setAtivo(true);
+            Mensagem msg = animalController.alterar(animalTeste);
+
+            if (!msg.getErro().isEmpty()) {
                 result = false;
             } else {
                 result = true;
             }
         } catch (Exception ex){
             result = false;
-            System.out.println("Teste animal: "+ex.getMessage());
         }
         assertThat(result).isEqualTo(expected);
     }
@@ -146,4 +145,6 @@ public class AnimalControllerTests {
         }
         assertThat(result).isEqualTo(expected);
     }
+
+
 }

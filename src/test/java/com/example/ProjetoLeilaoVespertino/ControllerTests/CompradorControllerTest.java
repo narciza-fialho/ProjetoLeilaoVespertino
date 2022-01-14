@@ -1,5 +1,6 @@
 package com.example.ProjetoLeilaoVespertino.ControllerTests;
 
+import com.example.ProjetoLeilaoVespertino.Mensagem;
 import com.example.ProjetoLeilaoVespertino.controller.CompradorController;
 import com.example.ProjetoLeilaoVespertino.entities.Comprador;
 import com.example.ProjetoLeilaoVespertino.repositories.CompradorRepository;
@@ -86,13 +87,12 @@ public class CompradorControllerTest {
 
         try {
             Comprador compradornovo = compradorController.buscar(this.idCompradorTeste);
-            Comprador compradorantigo = compradorController.buscar(this.idCompradorTeste);
-            compradornovo.setNome("Maristela Filho");
+            compradornovo.setNome("Marcelo");
             compradornovo.setEmail("mnfialho@hotmail.com");
             compradornovo.setTelefone("67992968584");
-            compradorController.alterar(compradornovo);
-            compradornovo = compradorController.buscar(this.idCompradorTeste);
-            if (compradornovo == compradorantigo) {
+            Mensagem msg =compradorController.alterar(compradornovo);
+
+            if (!msg.getErro().isEmpty()) {
                 result = false;
             } else {
                 result = true;

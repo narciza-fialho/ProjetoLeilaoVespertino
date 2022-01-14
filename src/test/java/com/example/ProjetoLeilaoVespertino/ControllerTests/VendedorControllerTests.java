@@ -87,7 +87,7 @@ public class VendedorControllerTests {
             vendedorNovo.setAtivo(true);
             vendedorNovo.setId(9);
             vendedorNovo.setEmail("abc1234@gmail.com");
-            vendedorNovo.setNome("Junior Neto");
+            vendedorNovo.setNome("");
             vendedorNovo.setTelefone("98989898989");
             vendedorController.alterar(vendedorNovo);
             if(vendedorNovo==vendedorAnterior){

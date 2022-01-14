@@ -89,7 +89,7 @@ public class VeterinarioControllerTests {
             Veterinario vetAtual = veterinarioController.buscar(this.idVeterinario);
             Veterinario vetDepois = veterinarioController.buscar(this.idVeterinario);
 
-            vetAtual.setNome("xxzzzzxxxxxxx");
+            vetAtual.setNome("x");
             vetAtual.setEmail("lilxzzxxxzheuhex@hotmail.com");
             vetAtual.setTelefone("4523451445");
             vetAtual.setAtivo(true);
